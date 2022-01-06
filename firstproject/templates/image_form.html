@@ -1,0 +1,48 @@
+{% extends 'base.html' %}  
+  
+{% block body %}
+
+
+<div class="container-123" px-0 h-4>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          {% comment %} <img src="https://source.unsplash.com/1600x600/?about" class="d-block w-100" alt="..."> {% endcomment %}
+          <img src="/static/img/contact_images/photo-1633360821222-7e8df83639fb.jpg" width="1370" height="480" alt="..."  >
+          <div class="carousel-caption d-none d-md-block">
+            
+          </div>
+        </div>
+
+        
+        
+      </div>
+      
+    </div>
+</div>
+
+<h2 style="text-align:center; margin-top:40px" > Add/Upload </h2>
+
+{% comment %} <form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Search...">
+</form> {% endcomment %}
+    
+<form method="post" enctype="multipart/form-data" align="center" style="margin-top:40px;">  
+        {% csrf_token %}  
+
+        {% if form.errors %}
+            <h3 style="margin-top:40px; color:Red">ERROR</h3>
+        {% endif %}
+
+        {{ form.as_p }}  
+        
+        <button style="margin-top:40px;" class = "btn btn-primary" type="submit">Upload</button>  
+</form>  
+  
+    {% if img_obj %}  
+        <h3 align="center" style="margin-top:40px; color:Green">Succesfully uploaded : {{img_obj.image_id}}</h3>  
+        <img  src="{{ img_obj.image.url}}" alt="connect" style="margin-right: auto; margin-left: auto; display: block; width: 50%; height: 50%">  
+    {% endif %}  
+  
+{% endblock body %}  

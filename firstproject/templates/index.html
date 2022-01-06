@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+
+{%block title%} 
+
+
+{% endblock title %}
+
+
+
+
+
+{% block body %} 
+
+<div class="container-123" px-0 h-4>
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        {% comment %} <img src="https://source.unsplash.com/1600x600/?cartography" class="d-block w-100" alt="..."> {% endcomment %}
+        <img src="/static/img/index_images/photo-1606933987885-1834b4d326bb.jpg" width="1370" height="480" alt="..."  >
+        <div class="carousel-caption d-none d-md-block">
+          <h2><font color="black"> First Slide </font></h2>
+        </div>
+      </div>
+      <div class="carousel-item" >
+        {% comment %} <img src="https://source.unsplash.com/1600x600/?mapping" class="d-block w-100" alt="..."> {% endcomment %}
+        <img src="/static/img/index_images/photo-1628709518209-9b658b636d7f.jpg" width="1370" height="480"  alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h2><font color="black"> Second Slide </font></h2>
+        </div>
+      </div>
+      <div class="carousel-item">
+        {% comment %} <img src="https://source.unsplash.com/1600x600/?worldmap" class="d-block w-100" alt="..."> {% endcomment %}
+        <img src="/static/img/index_images/photo-1592640845644-17d8a6ba0c90.jpg" width="1370" height="480" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h2><font color="white"> Third Slide </font></h2>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+<div class="container456" style="margin-top: 160px; margin-left:140px">
+
+  <img src="/static/img/index_images/GIS-Map-3D.jpg" style= "width:500px; height:300px; position:relative" ><p style= "margin-left:518px">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod repellendus praesentium ab. Ex facilis nulla necessitatibus, repudiandae maiores quibusdam eveniet, dicta neque sed excepturi et autem, laborum cumque reiciendis explicabo reprehenderit libero sapiente maxime voluptatibus veniam minus laudantium cupiditate aut? Ratione mollitia ea cumque quisquam maiores vel officia eaque odit.</p>
+
+  <img src="/static/img/index_images/GIS-Map-3D.jpg" style= "width:500px; height:300px; position:relative" ><p style= "margin-left:518px">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod repellendus praesentium ab. Ex facilis nulla necessitatibus, repudiandae maiores quibusdam eveniet, dicta neque sed excepturi et autem, laborum cumque reiciendis explicabo reprehenderit libero sapiente maxime voluptatibus veniam minus laudantium cupiditate aut? Ratione mollitia ea cumque quisquam maiores vel officia eaque odit.</p>
+
+  <img src="/static/img/index_images/GIS-Map-3D.jpg" style= "width:500px; height:300px; position:relative" ><p style= "margin-left:518px">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod repellendus praesentium ab. Ex facilis nulla necessitatibus, repudiandae maiores quibusdam eveniet, dicta neque sed excepturi et autem, laborum cumque reiciendis explicabo reprehenderit libero sapiente maxime voluptatibus veniam minus laudantium cupiditate aut? Ratione mollitia ea cumque quisquam maiores vel officia eaque odit.</p>
+
+</div>
+
+{% endblock body %}

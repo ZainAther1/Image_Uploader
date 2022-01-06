@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{%block title%} List of Images {% endblock title %}
+
+
+{% block body %} 
+
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        
+        <th scope="col">ID</th>
+        <th scope="col">Desc</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        {% for uploadimage in object_list %}
+        <tr>
+          {% comment %} <th scope="row">1</th> {% endcomment %}
+          <td>{{uploadimage.image_id}}</td>
+          <td>{{uploadimage.desc}}</td>
+          <td><a href="/media/{{uploadimage.image}}">{{uploadimage.image}}</a></td>
+        </tr>
+        {% endfor %}
+        
+      </tbody>
+
+</table>
+{% endblock body %}

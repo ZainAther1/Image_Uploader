@@ -1,48 +1,261 @@
-{% extends 'base.html' %}  
-  
-{% block body %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" >
+
+    <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
+   
 
 
-<div class="container-123" px-0 h-4>
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          {% comment %} <img src="https://source.unsplash.com/1600x600/?about" class="d-block w-100" alt="..."> {% endcomment %}
-          <img src="/static/img/contact_images/photo-1633360821222-7e8df83639fb.jpg" width="1370" height="480" alt="..."  >
-          <div class="carousel-caption d-none d-md-block">
+    
+
+
+
+   
+
+
+
+
+
+    <title> {%block title%} {% endblock title %}</title>
+  </head>
+  <body style="background-color:#f5f5dc">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">GIS Solutions</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+              </li>
+              
+              
+              <li class="nav-item">
+                <a class="nav-link " href="/add/">Add/Upload</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/list/">List</a>
+              </li>
+            </ul>
             
           </div>
         </div>
+      </nav>
+  
+  
 
-        
-        
-      </div>
-      
-    </div>
-</div>
 
-<h2 style="text-align:center; margin-top:40px" > Add/Upload </h2>
 
-{% comment %} <form action="{% url 'search_results' %}" method="get">
-  <input name="q" type="text" placeholder="Search...">
-</form> {% endcomment %}
     
-<form method="post" enctype="multipart/form-data" align="center" style="margin-top:40px;">  
+
+<br>
+<br>
+<br>
+
+
+<h1 style="text-align:center; margin-top:40px; " > Add/Upload </h1>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% comment %} FORM starts here {% endcomment %}
+<div class="form_class" style="background-color:#bfc1c2;  margin-top:60px; padding-left:2%; padding-top:9px; font-size:14px;">
+
+    <form method="post" enctype="multipart/form-data"  > 
+
         {% csrf_token %}  
 
-        {% if form.errors %}
-            <h3 style="margin-top:40px; color:Red">ERROR</h3>
-        {% endif %}
-
-        {{ form.as_p }}  
         
-        <button style="margin-top:40px;" class = "btn btn-primary" type="submit">Upload</button>  
-</form>  
+        
+
+<br>
+<br>
+        {% comment %} FORM fields {% endcomment %}
+          <span><dt id="form_id" > <h6 style="display: inline; margin-right: 0px"> Form_ID </h6> : {{ form.form_id }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 
+
+          <h6 style="display: inline; cursor:pointer "> Type  </h6> : &nbsp; <select name="Massavi" id="Massavi"> 
+          <option value="" selected="selected">Massavi</option>
+          
+          </select> <span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+          
+
+
+          <span><h6 style="display: inline; px: 10px"> Image </h6> : 
+            {% comment %} <div class="form-input"> {% endcomment %}
+                {% comment %} <label for="file-ip-1">Upload Image</label> {% endcomment %}
+                
+                <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);" {{form.image}}
+                <div class="preview ">
+                  
+                    <img id="file-ip-1-preview" style="display: block;margin-left: 60.6%;position: absolute;height: 508px;width: 505px;top: 360px;background-color:white;">
+                  
+                </div>
+                
+                
+            {% comment %} </div> {% endcomment %}
+    
+    
+
+    
+    {% comment %} Javascript function to preview image before uploading         {% endcomment %}
+    <script>
+        
+
+        function showPreview(event){
+            if(event.target.files.length > 0){
+                var src = URL.createObjectURL(event.target.files[0]);
+                var preview = document.getElementById("file-ip-1-preview");
+                preview.src = src;
+                preview.style.display = "block";
+                                            }
+                                    }
+
+
+    </script> 
+
+
+    
+
+
+    
+
+
+
+          
+          </dt></span>
+
+          <br>
+          <br>
+
+          <dt id="District"><span> 
+          <h6 style="display: inline; "> District </h6> :  
+          <select name="District" style="width:16%" id="select1"> 
+            <option value="Rawalpindi" >Rawalpindi</option> 
+            <option value="Islamabad" >Islamabad</option>
+          </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+            <script type="text/javascript">
+              function getOption() {
+                  selectElement = document.querySelector('#select1');
+                  
+              }
+              </script>
+
+          <span> <h6 style="display: inline; "> Tehsil </h6> : 
+          <select name="Tehsil" id="Tehsil"> 
+            <option value="Rawalpindi" >Rawalpindi</option> </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+
+          <span> <h6 style="display: inline; "> Patwar_Circle </h6> : 
+          <select name="Patwar_Circle" id="Patwar_Circle" style="width:11%"> 
+            <option value="Rawalpindi" >Rawalpindi</option> </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        
+          </span></dt>
+
+          <br>
+          <br>
+
+          <dt id="Mauza"><span>
+          <h6 style="display: inline;"> Mauza </h6> : &nbsp; 
+          <select name="Mauza" style="width:15%" > 
+            <option value="Rawalpindi" >Rawalpindi</option> </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+          
+          <span> <h6 style="display: inline; "> Massavi_No </h6> : 
+          <select name="Massavi" id="Massavi"> 
+            <option value="Rawalpindi" >Rawalpindi</option> </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          </span></dt>
+    
+            
+          
+          <br>
+          
+          {% comment %} Submit button {% endcomment %}
+          <div class="button_upload" style="margin-left: 330px">
+            <button style="margin-top:90px; background-color: #008CBA; color:white; font-size:17px; font-weight: bold;" class = "btn btn-primary" type="submit" >Submit Form</button></div>
+
+
+
+          
+
+        
+    <br>
+
+    </form>  
+
+
+</div>
+
+
+
+
+
+
+<div id="img-container" style="width: 500px; height:200px;">
+  <img src="http://127.0.0.1:8000/media/images/1_9qWh29G.jpg" />
+</div> 
+<script>
+
+var options1 = {
+  width: 400,
+  height: 400,
+  zoomWidth: 400,
+  zoomHeight: 50,
+  zoomType:'standard',
+  lens: true,
+  offset: {vertical: 0, horizontal: 0}
+};
+
+// If the width and height of the image are not known or to adjust the image to the container of it
+var options2 = {
+  fillContainer: false,
+  offset: {vertical: 0, horizontal: 10}
+};
+
+new ImageZoom(document.getElementById("img-container"), options1);
+
+</script>
+
+
+
+
+
+
+<!-- Error messaging -->
+{% if form.errors %}
+            
+    <div id="errors">
+      <div class="inner">
+          <h2 style="color:red;">ERROR:</h2>
+          <ul style="color:black; font-size:22px;">
+              {% for field in form %}
+                  {% if field.errors %}
+                  <li >{{ field.label }}: {{ field.errors|striptags }}</li>
+                  {% endif %}
+              {% endfor %}
+          </ul>
+      </div>
+    </div>
   
+{% endif %}
+
+
+
+
+{% comment %} display message when form is Succesfully submitted {% endcomment %}
     {% if img_obj %}  
-        <h3 align="center" style="margin-top:40px; color:Green">Succesfully uploaded : {{img_obj.image_id}}</h3>  
-        <img  src="{{ img_obj.image.url}}" alt="connect" style="margin-right: auto; margin-left: auto; display: block; width: 50%; height: 50%">  
+        <h3 align="center" style="margin-top:60px; display: inline; color:black; margin-left: 98px;">Succesfully submitted form with form id : <h2 align="center" style="margin-top:40px; color:green; display: inline;">{{img_obj.form_id}}</h2></h3>  
+        {% comment %} <img  src="{{ img_obj.image.url}}" alt="connect" style="margin-right: auto; margin-left: auto; display: block; width: 50%; height: 50%">   {% endcomment %}
     {% endif %}  
   
-{% endblock body %}  
+</body>
+</html>

@@ -8,14 +8,13 @@ from .models import UploadImage
 from django.views.generic import ListView
 from imageuploader.models import UploadImage
   
+
+from django.db.models import Q
+
   
 from .models import UploadImage
+
   
-
-
-
-
-
 
   
   
@@ -24,6 +23,10 @@ def index(request):
   
   
 def image_request(request):  
+    
+    
+    
+    
     if request.method == 'POST':  
         form = UserImageForm(request.POST, request.FILES)  
         if form.is_valid():  
@@ -40,6 +43,32 @@ def image_request(request):
   
     return render(request, 'image_form.html', {'form': form})  
 
+
+
+
+def search(request):
+    
+    search_query = request.GET.get('search',None)
+    
+    
+    if search_query:
+        posts = UploadImage.objects.filter(Q(desc__icontains = search_query))
+        
+    
+    else:
+        posts = UploadImage.objects.all
+    
+    
+    return render(request, 'search_results.html')
+    
+    # """ search function  """
+    # if request.method == "GET":
+    #     query_name = request.GET.get('search', None)
+    #     if query_name:
+    #         results = UploadImage.objects.filter(desc__contains=query_name)
+    #         return render(request, 'search_results.html', {"results":results})
+
+    # return render(request, 'search_results.html')
 
 
 

@@ -1,9 +1,40 @@
-<h1>Search Results</h1>
+{% extends 'base.html' %}
 
-<ul>
+
+
+{% comment %} <ul>
   {% for uploadimage in object_list %}
     <li>
       {{ uploadimage.image_id }}, {{ uploadimage.desc }}
     </li>
   {% endfor %}
-</ul>
+</ul> {% endcomment %}
+
+{% block body %}
+<br>
+<h2 style="text-align:center; color:Blue" >Search Results</h2>
+<br>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      
+      <th scope="col">ID</th>
+      <th scope="col">Desc</th>
+      {% comment %} <th scope="col">Image</th> {% endcomment %}
+    </tr>
+  </thead>
+
+  <tbody>
+      {% for uploadimage in object_list %}
+      <tr>
+        
+        <td>{{uploadimage.image_id}}</td>
+        <td>{{uploadimage.desc}}</td>
+        {% comment %} <td><a href="/media/{{uploadimage.image}}">{{uploadimage.image}}</a></td> {% endcomment %}
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+
+</table>
+{% endblock body %}

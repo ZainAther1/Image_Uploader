@@ -7,23 +7,39 @@
 {% block body %} 
 
 
+<form class="d-flex" method="GET" action="{% url 'imageuploader:search_results' %}">
+  {% comment %} {% csrf_token %} {% endcomment %}
+  <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="search">
+  <input class="btn btn-outline-success" type="submit" value="Search">
+</form>
+
 <table class="table table-bordered">
     <thead>
       <tr>
         
         <th scope="col">ID</th>
-        <th scope="col">Desc</th>
+        <th scope="col">Data_Type</th>
         <th scope="col">Image</th>
+        <th scope="col">District</th>
+        <th scope="col">Tehsil</th>
+        <th scope="col">Patwar_Circle</th>
+        <th scope="col">Mauza/Ward</th>
+        <th scope="col">Massavi_No</th>
       </tr>
     </thead>
 
     <tbody>
         {% for uploadimage in object_list %}
         <tr>
-          {% comment %} <th scope="row">1</th> {% endcomment %}
-          <td>{{uploadimage.image_id}}</td>
-          <td>{{uploadimage.desc}}</td>
+          
+          <td>{{uploadimage.form_id}}</td>
+          <td>{{uploadimage.type_data}}</td>
           <td><a href="/media/{{uploadimage.image}}">{{uploadimage.image}}</a></td>
+          <td>{{uploadimage.district}}</td>
+          <td>{{uploadimage.tehsil}}</td>
+          <td>{{uploadimage.patwar_circle}}</td>
+          <td>{{uploadimage.mauza}}</td>
+          <td>{{uploadimage.massavi_no}}</td>
         </tr>
         {% endfor %}
         

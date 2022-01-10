@@ -14,5 +14,7 @@ urlpatterns = [
     path('', views.index, name = "Home"),
     path('add/', views.image_request, name='upload'),
     path ('list/', Images_List.as_view(), name='list'),
-    path('search/', SearchResultsView.as_view(), name='search_results')
+    path('search/', views.search, name='search_results')
     ]
+
+# SearchResultsView.as_view()

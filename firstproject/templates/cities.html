@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+
+<body>
+<h1>HOME</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        
+      
+    </tr>
+    {% for item in query_results %}
+        <tr> 
+            <td>{{ item.cities }}</td>
+            
+            
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
+
+

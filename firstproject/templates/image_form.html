@@ -10,7 +10,75 @@
 
     <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
    
+    <style>
 
+      
+      
+      {% comment %} #navbar {
+        overflow: hidden;
+        background-color: #099;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-left: 20px;
+      }
+      #navbar a {
+        float: left;
+        display: block;
+        color: #666;
+        text-align: center;
+        padding-right: 20px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+      #navbar a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+      #navbar a.active {
+        background-color: #4CAF50;
+        color: white;
+      }
+      .main {
+        padding: 16px;
+        margin-top: 30px;
+      }
+      .main img {
+        max-width: 100%;
+        height: auto;
+      }
+      .button {
+        width: 300px;
+        height: 60px;
+      } {% endcomment %}
+
+
+
+      #drag-img {
+        cursor: move;
+        position: relative;
+        width: 100%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        left: 50%;
+      }
+      
+      #container {
+        overflow: hidden;
+        background: red;
+        height: 500px;
+        width: 500px;
+      }
+      
+      .button {
+        width: 200px;
+        height: 50px;
+      }
+
+    </style>
+    
 
     
 
@@ -24,7 +92,7 @@
 
     <title> {%block title%} {% endblock title %}</title>
   </head>
-  <body style="background-color:#f5f5dc">
+  <body style="background-color:#bfc1c2">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">GIS Solutions</a>
@@ -80,10 +148,10 @@
         
         
 
-<br>
-<br>
+{% comment %} <br> {% endcomment %}
+{% comment %} <br> {% endcomment %}
         {% comment %} FORM fields {% endcomment %}
-          <span><dt id="form_id" > <h6 style="display: inline; margin-right: 0px"> Form_ID </h6> : {{ form.form_id }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 
+          {% comment %} <span><dt id="form_id" > <h6 style="display: inline; margin-right: 0px"> Form_ID </h6> : {{ form.form_id }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 
 
           <h6 style="display: inline; cursor:pointer "> Type  </h6> : &nbsp; <select name="Massavi" id="Massavi"> 
           <option value="" selected="selected">Massavi</option>
@@ -92,17 +160,21 @@
           
 
 
-          <span><h6 style="display: inline; px: 10px"> Image </h6> : 
+          <span><h6 style="display: inline; px: 10px"> Image </h6> :  {% endcomment %}
             {% comment %} <div class="form-input"> {% endcomment %}
                 {% comment %} <label for="file-ip-1">Upload Image</label> {% endcomment %}
                 
-                <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);" {{form.image}}
+                {% comment %} <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);" onchange="readURL(this);" {{form.image}}
                 <div class="preview ">
                   
-                    <img id="file-ip-1-preview" style="display: block;margin-left: 60.6%;position: absolute;height: 508px;width: 505px;top: 360px;background-color:white;">
+                    <img id="file-ip-1-preview" style="display: block;margin-left: 60.6%;position: absolute;height: 508px;width: 505px;top: 360px;background-color:white;"> 
                   
-                </div>
-                
+                </div> {% endcomment %} 
+
+
+
+
+
                 
             {% comment %} </div> {% endcomment %}
     
@@ -110,7 +182,7 @@
 
     
     {% comment %} Javascript function to preview image before uploading         {% endcomment %}
-    <script>
+    {% comment %} <script>
         
 
         function showPreview(event){
@@ -123,7 +195,7 @@
                                     }
 
 
-    </script> 
+    </script>  {% endcomment %}
 
 
     
@@ -136,21 +208,21 @@
           
           </dt></span>
 
-          <br>
+          {% comment %} <br>
           <br>
 
           <dt id="District"><span> 
           <h6 style="display: inline; "> District </h6> :  
           <select name="District" style="width:16%" id="select1"> 
-            <option value="Rawalpindi" >Rawalpindi</option> 
-            <option value="Islamabad" >Islamabad</option>
+
+            <option>
+              {% for data in cities_name_list %}
+                  {{data}}
+              {% endfor %}
+            </option> 
+            
           </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-            <script type="text/javascript">
-              function getOption() {
-                  selectElement = document.querySelector('#select1');
-                  
-              }
-              </script>
+            
 
           <span> <h6 style="display: inline; "> Tehsil </h6> : 
           <select name="Tehsil" id="Tehsil"> 
@@ -177,30 +249,296 @@
     
             
           
-          <br>
+           {% endcomment %}
           
+          <tr>
+              <th><label for="id_form_id">Form id:</label></th>
+              <td>
+                
+                <input type="text" name="form_id" value="1379" maxlength="20" required id="id_form_id">
+                
+                
+              </td>
+            </tr>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <tr>
+              <th><label style="display: inline;" for="id_image">Image:</label></th>
+              <td>
+                
+                <input type="file" name="image" accept="image/*" id="id_image"  onchange="readURL(this);" {{form.image}}
+                {% comment %} <div class="preview "> {% endcomment %}
+                  
+                    {% comment %} <img id="file-ip-1-preview" style="display: block;margin-left: 60.6%;position: absolute;height: 508px;width: 505px;top: 600px;background-color:white;">  {% endcomment %}
+                
+                
+              </td>
+            </tr>
+          
+            <tr>
+              <th><label for="id_type_data">Type data:</label></th>
+              <td>
+                
+                <input type="text" name="type_data" value="Massavi" maxlength="50" id="id_type_data">
+                
+                
+              </td>
+            </tr> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <tr>
+              <th><label for="id_district">District:</label></th>
+              <td>
+                
+                <select name="district" id="id_district">
+            <option value="">---------</option>
+          
+            <option value="Abbotabad" selected>Abbotabad</option>
+          
+            <option value="Bahawalpur">Bahawalpur</option>
+          
+            <option value="Charsaddah">Charsaddah</option>
+          
+            <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+          
+            <option value="Faisalabad">Faisalabad</option>
+          
+            <option value="Gawadar">Gawadar</option>
+          
+            <option value="Islamabad">Islamabad</option>
+          
+            <option value="Rawalpindi">Rawalpindi</option>
+          
+            <option value="Karachi">Karachi</option>
+          
+            <option value="Faislabad">Faislabad</option>
+          
+            <option value="Lahore">Lahore</option>
+          
+            <option value="Multan">Multan</option>
+          
+          </select>
+                
+                
+              </td>
+            </tr>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <tr>
+              <th><label for="id_tehsil">Tehsil:</label></th>
+              <td>
+                
+                <select name="tehsil" id="id_tehsil">
+            <option value="">---------</option>
+          
+            <option value="Abbotabad">Abbotabad</option>
+          
+            <option value="Bahawalpur">Bahawalpur</option>
+          
+            <option value="Charsaddah" selected>Charsaddah</option>
+          
+            <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+          
+            <option value="Faisalabad">Faisalabad</option>
+          
+            <option value="Gawadar">Gawadar</option>
+          
+            <option value="Islamabad">Islamabad</option>
+          
+            <option value="Rawalpindi">Rawalpindi</option>
+          
+            <option value="Karachi">Karachi</option>
+          
+            <option value="Faislabad">Faislabad</option>
+          
+            <option value="Lahore">Lahore</option>
+          
+            <option value="Multan">Multan</option>
+          
+          </select>
+                
+                
+              </td>
+            </tr>
+
+          <br>
+          <br>
+          <br>  
+
+            <tr>
+              <th><label for="id_patwar_circle">Patwar circle:</label></th>
+              <td>
+                
+                <select name="patwar_circle" id="id_patwar_circle">
+            <option value="">---------</option>
+          
+            <option value="Abbotabad">Abbotabad</option>
+          
+            <option value="Bahawalpur">Bahawalpur</option>
+          
+            <option value="Charsaddah">Charsaddah</option>
+          
+            <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+          
+            <option value="Faisalabad">Faisalabad</option>
+          
+            <option value="Gawadar">Gawadar</option>
+          
+            <option value="Islamabad">Islamabad</option>
+          
+            <option value="Rawalpindi" selected>Rawalpindi</option>
+          
+            <option value="Karachi">Karachi</option>
+          
+            <option value="Faislabad">Faislabad</option>
+          
+            <option value="Lahore">Lahore</option>
+          
+            <option value="Multan">Multan</option>
+          
+          </select>
+                
+                
+              </td>
+            </tr>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <tr>
+              <th><label for="id_mauza">Mauza:</label></th>
+              <td>
+                
+                <select name="mauza" id="id_mauza">
+            <option value="">---------</option>
+          
+            <option value="Abbotabad" selected>Abbotabad</option>
+          
+            <option value="Bahawalpur">Bahawalpur</option>
+          
+            <option value="Charsaddah">Charsaddah</option>
+          
+            <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+          
+            <option value="Faisalabad">Faisalabad</option>
+          
+            <option value="Gawadar">Gawadar</option>
+          
+            <option value="Islamabad">Islamabad</option>
+          
+            <option value="Rawalpindi">Rawalpindi</option>
+          
+            <option value="Karachi">Karachi</option>
+          
+            <option value="Faislabad">Faislabad</option>
+          
+            <option value="Lahore">Lahore</option>
+          
+            <option value="Multan">Multan</option>
+          
+          </select>
+                
+                
+              </td>
+            </tr>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <tr>
+              <th><label for="id_massavi_no">Massavi no:</label></th>
+              <td>
+                
+                <select name="massavi_no" id="id_massavi_no">
+            <option value="">---------</option>
+          
+            <option value="Alif-1">Alif-1</option>
+          
+            <option value="Bay-1" selected>Bay-1</option>
+          
+            <option value="Jeem-1">Jeem-1</option>
+          
+            <option value="Daal-1">Daal-1</option>
+          
+            <option value="Hay-1">Hay-1</option>
+          
+            <option value="Wao-1">Wao-1</option>
+          
+          </select>
+                
+                
+                  
+                
+              </td>
+            </tr>
+    
+
+
           {% comment %} Submit button {% endcomment %}
           <div class="button_upload" style="margin-left: 330px">
-            <button style="margin-top:90px; background-color: #008CBA; color:white; font-size:17px; font-weight: bold;" class = "btn btn-primary" type="submit" >Submit Form</button></div>
+            <button style="margin-top:90px; background-color: #008CBA; color:white; font-size:17px; margin-left: 26%; font-weight: bold;" class = "btn btn-primary" type="submit" >Submit Form</button></div>
 
 
 
-          
 
-        
-    <br>
+            {% comment %}
+TO FETCH URL OF IMAGE 
+{% endcomment %} 
+
+                 {% comment %} <input type='file' onchange="readURL(this);" /> {% endcomment %}
+                 <br />
+                 <br /> 
+                 
+                  {% comment %} <button id="toggleCanvasDisplay" onclick="toggleCanvas()">Hide canvas</button>  <button id="toggleDataUrl" onclick="toggleDataUrl()">Hide dataUrl</button>   {% endcomment %}
+                 
+                 
+                 
+                 
+ 
+ <script>        
+ function readURL(input) {
+   if (input.files && input.files[0]) {
+     var reader = new FileReader();
+ 
+     reader.addEventListener(
+       "load",
+       function() {
+         var avatarImg = new Image();
+         var src = reader.result;
+         avatarImg.src = src;
+         document.getElementById("dataUrl").innerText = src;
+ 
+         avatarImg.onload = function() {
+           var c = document.getElementById("myCanvas");
+           var ctx = c.getContext("2d");
+           ctx.canvas.width = avatarImg.width;
+           ctx.canvas.height = avatarImg.height;
+           
+           ctx.drawImage(avatarImg, 0, 0);
+         };
+       },
+       false
+     );
+ 
+     reader.readAsDataURL(input.files[0]);
+   }
+ }
+ 
+ 
+ </script>
+
+ 
+ 
+            
 
     </form>  
 
 
 </div>
 
+<textarea hidden id="dataUrl" rows="4" cols="100">
+</textarea>
+ 
+
+<canvas style="margin-left: 36.5%; height:400px; width:350px;" id="myCanvas"></canvas>
 
 
 
+{% comment %} ZOOM IMAGE like AMAZON, EBAY etc. 
 
 
-<div id="img-container" style="width: 500px; height:200px;">
+ <div id="img-container" style="width: 400px; height:200px;">
   <img src="http://127.0.0.1:8000/media/images/1_9qWh29G.jpg" />
 </div> 
 <script>
@@ -209,21 +547,32 @@ var options1 = {
   width: 400,
   height: 400,
   zoomWidth: 400,
-  zoomHeight: 50,
+  zoomHeight: 20,
   zoomType:'standard',
   lens: true,
-  offset: {vertical: 0, horizontal: 0}
+  offset: {vertical: 50, horizontal: 100}
 };
 
 // If the width and height of the image are not known or to adjust the image to the container of it
 var options2 = {
   fillContainer: false,
-  offset: {vertical: 0, horizontal: 10}
+  offset: {vertical: 20, horizontal: 50}
 };
 
 new ImageZoom(document.getElementById("img-container"), options1);
 
-</script>
+</script>  
+
+{% endcomment %}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -256,6 +605,41 @@ new ImageZoom(document.getElementById("img-container"), options1);
         <h3 align="center" style="margin-top:60px; display: inline; color:black; margin-left: 98px;">Succesfully submitted form with form id : <h2 align="center" style="margin-top:40px; color:green; display: inline;">{{img_obj.form_id}}</h2></h3>  
         {% comment %} <img  src="{{ img_obj.image.url}}" alt="connect" style="margin-right: auto; margin-left: auto; display: block; width: 50%; height: 50%">   {% endcomment %}
     {% endif %}  
+
+
+
+
+    {% comment %} ZOOM IMAGE with + and - Buttons {% endcomment %}
+<script>
+
+  function zoomin(){
+    var myImg = document.getElementById("map");
+    var currWidth = myImg.clientWidth;
+    if(currWidth == 2500) return false;
+     else{
+        myImg.style.width = (currWidth + 100) + "px";
+    } 
+}
+  function zoomout(){
+    var myImg = document.getElementById("map");
+    var currWidth = myImg.clientWidth;
+    if(currWidth == 100) return false;
+      else{
+        myImg.style.width = (currWidth - 100) + "px";
+    }
+}
+
+</script>
+
+<div id="navbar">
+  <button type="button" onclick="zoomin()"> <h6>+</h6> </button>
+  <button type="button" onclick="zoomout()"> <h6>--</h6> </button>
+  </div>
+  
+  <div class="main">
+  <img id="map" src="http://127.0.0.1:8000/media/images/1_9qWh29G.jpg" />
+</div> 
+
   
 </body>
 </html>

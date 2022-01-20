@@ -15,8 +15,8 @@ urlpatterns = [
     path('add/', views.image_request, name='upload'),
     path ('list/', Images_List.as_view(), name='list'),
     path('search/', views.search, name='search_results'),
-    path('cities/', views.cities_view, name='cities_names'),
-    path('home/', views.home_view ),
+    path('add/error/', views.error, name='error'),
+    
     ]
 
 # SearchResultsView.as_view()

@@ -1,4 +1,6 @@
 from django.db import models
+from django.db import IntegrityError
+from django.http import HttpResponse
 
 
 # lists of options
@@ -8,14 +10,20 @@ massavi_sheets=(("Alif-1","Alif-1"),("Bay-1","Bay-1"),("Jeem-1","Jeem-1"),("Daal
 
 
 
+# define upload path function
+def content_file_name(instance, filename):
+    name, ext = filename.split('.')
+    file_path = 'images/{mauza}/{form_id}.{ext}'.format(
+          form_id=instance.form_id, mauza=instance.mauza, ext=ext) 
+    return file_path
 
 
 # Create your models here.
 class UploadImage(models.Model):  
     
-    form_id = models.CharField(max_length=20, primary_key=True, unique=True, default=1) 
+    form_id = models.CharField(max_length=100, primary_key=True, unique=True, default=1) 
     
-    image = models.ImageField(upload_to='images', null=True, blank=True)  
+    image = models.ImageField(max_length=200,upload_to= content_file_name, null=True, blank=True)  
     
     type_data = models.CharField(max_length=50, null=True, blank=True, default="Massavi")
     
@@ -31,28 +39,37 @@ class UploadImage(models.Model):
     
     
     
-  
-  
-  
-    def __str__(self):  
-        return self.form_id  
-    
-    
-    
-class cities_list(models.Model):
-    # newly added
-    cities = models.CharField(max_length=50, null=True, blank=True)
     
     def __str__(self):  
-        return self.cities 
+        return self.form_id 
+  
+  
+    def save(self, *args, **kwargs):
+        
+        self.form_id = f'{self.district}_{self.tehsil}_{self.patwar_circle}_{self.mauza}_{self.massavi_no}'
+        super(UploadImage,self).save(*args, **kwargs)
+         
+        
+        # if IntegrityError:
+        #         return HttpResponse("ERROR: form already exists!")
+        
+        
+        
+        # student=UploadImage.objects.get(pk=form_id)
+        # student.save()
+        # print (student.form_id)
     
     
     
+    # def get_formid_value():
     
-class Geeks_Model(models.Model):
+    #     formid_value = UploadImage.objects.get(pk=form_id)
+    #     print(formid_value)
+    #     return formid_value
     
-    name = models.CharField(max_length=50, null=True, blank=True)
+    # my_object = get_formid_value()
     
-    age = models.CharField(max_length=50, null=True, blank=True)
+    
+
     
     

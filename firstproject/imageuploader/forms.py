@@ -19,6 +19,12 @@ class UserImageForm(forms.ModelForm):
         model = UploadImage  
         # It includes all the fields of model  
         fields = '__all__'
+        
+        
+        
+        
+
+
 
         
         

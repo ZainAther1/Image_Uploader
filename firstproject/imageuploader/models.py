@@ -1,11 +1,13 @@
 from django.db import models
 from django.db import IntegrityError
 from django.http import HttpResponse
+from datetime import datetime
+
 
 
 # lists of options
-cities_name_list=(("Abbotabad","Abbotabad"),("Bahawalpur","Bahawalpur"),("Charsaddah","Charsaddah"),("Dera Ghazi Khan","Dera Ghazi Khan"),("Faisalabad","Faisalabad"),("Gawadar","Gawadar"),("Islamabad","Islamabad"),("Rawalpindi","Rawalpindi"),("Karachi","Karachi"),("Faislabad","Faislabad"),("Lahore","Lahore"),("Multan","Multan"))
-massavi_sheets=(("Alif-1","Alif-1"),("Bay-1","Bay-1"),("Jeem-1","Jeem-1"),("Daal-1","Daal-1"),("Hay-1","Hay-1"),("Wao-1","Wao-1"))
+cities_name_list=(("Abbotabad","Abbotabad"),("Bahawalpur","Bahawalpur"),("Charsaddah","Charsaddah"),("Dera Ghazi Khan","Dera Ghazi Khan"),("Faisalabad","Faisalabad"),("Gawadar","Gawadar"),("Islamabad","Islamabad"),("Rawalpindi","Rawalpindi"),("Karachi","Karachi"),("Lahore","Lahore"),("Multan","Multan"),("None","None"))
+massavi_sheets=(("Alif-1","Alif-1"),("Bay-1","Bay-1"),("Jeem-1","Jeem-1"),("Daal-1","Daal-1"),("Hay-1","Hay-1"),("Wao-1","Wao-1"),("None","None"))
 
 
 
@@ -22,6 +24,8 @@ def content_file_name(instance, filename):
 class UploadImage(models.Model):  
     
     form_id = models.CharField(max_length=100, primary_key=True, unique=True, default=1) 
+    
+    time_now = models.DateField(default=datetime.now,blank=True)
     
     image = models.ImageField(max_length=200,upload_to= content_file_name, null=True, blank=True)  
     

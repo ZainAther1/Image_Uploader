@@ -7,17 +7,222 @@
 {% block body %} 
 
 
-<form class="d-flex" method="GET" action="{% url 'imageuploader:search_results' %}">
-  {% comment %} {% csrf_token %} {% endcomment %}
-  <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="search">
-  <input class="btn btn-outline-success" type="submit" value="Search">
-</form>
+{% load imageuploader_extras %}
 
-<table class="table table-bordered">
-    <thead>
+ <form method="GET" align="center" style="background:#d3d3d3;  ">
+  
+        {% comment %} {{ filtered_images.form}} {% endcomment %}
+  
+        <tr>
+          <th><label for="id_time_now"><b>Date</b>(yyyy-mm-date)<b>:</b></label></th>
+          <td>
+            
+            <input type="text" name="time_now" id="id_time_now">
+            
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <th><label for="id_district"><b>District:</b></label></th>
+          <td>
+            
+            <select name="district" id="id_district">
+        <option value="" selected>---------</option>
+      
+        <option value="Abbotabad">Abbotabad</option>
+      
+        <option value="Bahawalpur">Bahawalpur</option>
+      
+        <option value="Charsaddah">Charsaddah</option>
+      
+        <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+      
+        <option value="Faisalabad">Faisalabad</option>
+      
+        <option value="Gawadar">Gawadar</option>
+      
+        <option value="Islamabad">Islamabad</option>
+      
+        <option value="Rawalpindi">Rawalpindi</option>
+      
+        <option value="Karachi">Karachi</option>
+      
+        <option value="Lahore">Lahore</option>
+      
+        <option value="Multan">Multan</option>
+      
+        <option value="None">None</option>
+      
+      </select>
+            
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <th><label for="id_tehsil"><b>Tehsil:</b></label></th>
+          <td>
+            
+            <select name="tehsil" id="id_tehsil">
+        <option value="" selected>---------</option>
+      
+        <option value="Abbotabad">Abbotabad</option>
+      
+        <option value="Bahawalpur">Bahawalpur</option>
+      
+        <option value="Charsaddah">Charsaddah</option>
+      
+        <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+      
+        <option value="Faisalabad">Faisalabad</option>
+      
+        <option value="Gawadar">Gawadar</option>
+      
+        <option value="Islamabad">Islamabad</option>
+      
+        <option value="Rawalpindi">Rawalpindi</option>
+      
+        <option value="Karachi">Karachi</option>
+      
+        <option value="Lahore">Lahore</option>
+      
+        <option value="Multan">Multan</option>
+      
+        <option value="None">None</option>
+      
+      </select>
+            
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <th><label for="id_patwar_circle"><b>Patwar circle:</b></label></th>
+          <td>
+            
+            <select name="patwar_circle" id="id_patwar_circle">
+        <option value="" selected>---------</option>
+      
+        <option value="Abbotabad">Abbotabad</option>
+      
+        <option value="Bahawalpur">Bahawalpur</option>
+      
+        <option value="Charsaddah">Charsaddah</option>
+      
+        <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+      
+        <option value="Faisalabad">Faisalabad</option>
+      
+        <option value="Gawadar">Gawadar</option>
+      
+        <option value="Islamabad">Islamabad</option>
+      
+        <option value="Rawalpindi">Rawalpindi</option>
+      
+        <option value="Karachi">Karachi</option>
+      
+        <option value="Lahore">Lahore</option>
+      
+        <option value="Multan">Multan</option>
+      
+        <option value="None">None</option>
+      
+      </select>
+            
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <th><label for="id_mauza"><b>Mauza:</b></label></th>
+          <td>
+            
+            <select name="mauza" id="id_mauza">
+        <option value="" selected>---------</option>
+      
+        <option value="Abbotabad">Abbotabad</option>
+      
+        <option value="Bahawalpur">Bahawalpur</option>
+      
+        <option value="Charsaddah">Charsaddah</option>
+      
+        <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+      
+        <option value="Faisalabad">Faisalabad</option>
+      
+        <option value="Gawadar">Gawadar</option>
+      
+        <option value="Islamabad">Islamabad</option>
+      
+        <option value="Rawalpindi">Rawalpindi</option>
+      
+        <option value="Karachi">Karachi</option>
+      
+        <option value="Lahore">Lahore</option>
+      
+        <option value="Multan">Multan</option>
+      
+        <option value="None">None</option>
+      
+      </select>
+            
+            
+          </td>
+        </tr>
+      
+        <tr>
+          <th><label for="id_massavi_no"><b>Massavi no:</b></label></th>
+          <td>
+            
+            <select name="massavi_no" id="id_massavi_no">
+        <option value="" selected>---------</option>
+      
+        <option value="Alif-1">Alif-1</option>
+      
+        <option value="Bay-1">Bay-1</option>
+      
+        <option value="Jeem-1">Jeem-1</option>
+      
+        <option value="Daal-1">Daal-1</option>
+      
+        <option value="Hay-1">Hay-1</option>
+      
+        <option value="Wao-1">Wao-1</option>
+      
+        <option value="None">None</option>
+      
+      </select>
+            
+            
+              
+            
+          </td>
+        </tr>
+        
+        &nbsp;
+        &nbsp;
+        
+        
+        
+        <button clas="btn btn-primary" type="Submit" style="background:#3cb371; color:white; margin-top: 1%; width:8%;">Search</button>
+      
+      <br>
+      <br>
+  
+</form> 
+
+
+<br>
+<br>
+
+<table class="table table-bordered" style="border:solid black 1.5px;">
+    <thead style="color: white; font-size: 17px; background:#d2b48c; border:solid black 1.5px;" align="center">
       <tr>
         
+        <th scope="col">Sno</th>
         <th scope="col">ID</th>
+        <th scope="col">Date</th>
         <th scope="col">Data_Type</th>
         <th scope="col">Image</th>
         <th scope="col">District</th>
@@ -28,11 +233,14 @@
       </tr>
     </thead>
 
-    <tbody>
-        {% for uploadimage in object_list %}
+    <tbody style="font:16px;">
+        {% for uploadimage in person_page_obj %}
         <tr>
+        
           
+          <td>{{uploadimage.obj_num}}</td>
           <td>{{uploadimage.form_id}}</td>
+          <td>{{uploadimage.time_now}}</td>
           <td>{{uploadimage.type_data}}</td>
           <td><a href="/media/{{uploadimage.image}}">{{uploadimage.image}}</a></td>
           <td>{{uploadimage.district}}</td>
@@ -46,4 +254,36 @@
       </tbody>
 
 </table>
+<br>
+<div>
+
+  <p align="center">Page <b>{{person_page_obj.number}}</b> of <b>{{person_page_obj.paginator.num_pages}}</b></p>
+
+</div>
+<br>
+<ul style="margin-left: 44.2%;" class="pagination">
+  {% if person_page_obj.has_previous %}
+
+  <li style="position: absolute;"><a href="{% relative_url 1 'page' request.GET.urlencode %}"><button>&laquo; first</button></a></li>
+  <li><a href="{% relative_url person_page_obj.previous_page_number 'page' request.GET.urlencode %}" previous></a></li>
+
+  
+  {% endif %}
+
+  
+
+  {% if person_page_obj.has_next %}
+  
+
+  <li style="margin-left:4.78%;position: absolute;"><a href="{% relative_url person_page_obj.next_page_number 'page' request.GET.urlencode %}"> <button>next &raquo;</button></a></li>
+  
+  <li style="margin-left: 9.8%;position: absolute;"><a href="{% relative_url person_page_obj.paginator.num_pages 'page' request.GET.urlencode %}"><button>last</button></a></li>
+
+
+  {% endif %}
+
+
+
+</ul>
+
 {% endblock body %}

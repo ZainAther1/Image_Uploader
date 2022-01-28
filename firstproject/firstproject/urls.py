@@ -24,3 +24,5 @@ urlpatterns = [
     path('', include(('imageuploader.urls'), namespace='imageuploader'))  
       
 ]  + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+

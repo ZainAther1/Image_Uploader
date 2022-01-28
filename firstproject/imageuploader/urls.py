@@ -6,17 +6,17 @@ from . import views
 from imageuploader.views import Images_List
 
 
-from imageuploader.views import SearchResultsView
+# from imageuploader.views import SearchResultsView
 
 
 app_name = 'imageuploader'  
 urlpatterns = [  
     path('', views.index, name = "Home"),
     path('add/', views.image_request, name='upload'),
-    path ('list/', Images_List.as_view(), name='list'),
-    path('search/', views.search, name='search_results'),
-    path('add/error/', views.error, name='error'),
+    path ('list/', views.Images_List, name='list'),
+    # path('create/', views.create, name='create'),
+    path ('add/error/', views.error, name='error'),
+    
     
     ]
 
-# SearchResultsView.as_view()

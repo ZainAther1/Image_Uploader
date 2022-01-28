@@ -1,6 +1,3 @@
-<h1>
-    Error : please change form id   
-</h1>
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,100 +5,75 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
+
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" >
 
-    <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
+    {% comment %} <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script> {% endcomment %}
    
-    <style>
+    
 
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>  
+    
 
     <meta https-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <link rel="stylesheet" href="style.css" />
+    {% comment %} <link rel="stylesheet" href="style.css" /> {% endcomment %}
       
+    <style>
+
       
-      
-      {% comment %} #navbar {
-        overflow: hidden;
-        background-color: #099;
-        position: fixed;
-        top: 0;
+        
+     
+      html, body {
+        margin: 0;
+        padding: 0;
         width: 100%;
-        padding-top: 3px;
-        padding-bottom: 3px;
-        padding-left: 20px;
+        height: 100%;
+        
       }
-      #navbar a {
-        float: left;
-        display: block;
-        color: #666;
-        text-align: center;
-        padding-right: 20px;
-        text-decoration: none;
-        font-size: 17px;
+      #zoom {
+        width: 100%;
+        height: 100%;
+        transform-origin: 0px 0px;
+        transform: scale(1) translate(0px, 0px);
+        cursor: grab;
       }
-      #navbar a:hover {
-        background-color: #ddd;
-        color: black;
-      }
-      #navbar a.active {
-        background-color: #4CAF50;
-        color: white;
-      }
-      .main {
-        padding: 16px;
-        margin-top: 30px;
-      }
-      .main img {
-        max-width: 100%;
+      div#zoom > img {
+        width: 100%;
         height: auto;
-      }
-      .button {
-        width: 300px;
-        height: 60px;
-      } {% endcomment %}
-
-
-
-      #drag-img {
-        cursor: move;
-        position: relative;
-        width: 100%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        left: 50%;
-      }
-      
-      #container {
         overflow: hidden;
-        background: red;
-        height: 500px;
-        width: 500px;
+        display: inline-block;
+        overflow: hidden;
+        border: solid black 1px;
       }
       
-      .button {
-        width: 200px;
-        height: 50px;
-      }
+      
+      #canvas{
 
-      .click-zoom input[type=checkbox] {
-        display: none
-      }
-      
-      .click-zoom img {
-        margin: 100px;
-        transition: transform 0.25s ease;
-        cursor: zoom-in
-      }
-      
-      .click-zoom input[type=checkbox]:checked~img {
-        transform: scale(2);
-        cursor: zoom-out
+        width: 470px;
+        height: 530px;
+        overflow: hidden;
+        display: block;
+        margin-left: 68%;
+        position: absolute;
+        top: 420px;
+        background: white;
+        border: solid black 1px;
+
+      #form_shape{
+
+        background: white;
       }
 
     </style>
+
+    {% comment %} style="display: block;margin-left: 59%;position: absolute;height: 508px;width: 470px;top: 380px;background-color:white;" {% endcomment %}
+      
+
+
+    
     
 
     
@@ -116,7 +88,7 @@
 
     <title> {%block title%} {% endblock title %}</title>
   </head>
-  <body style="background-color:#bfc1c2">
+  <body style="background-color:silver">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">GIS Solutions</a>
@@ -146,393 +118,50 @@
 
 
 
-    
+<br>    
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+  <h2 style="text-align:center; margin-top:40px; background: #3cb371; padding-top: 20px;padding-bottom: 20px;border-radius: 25px; box-shadow: 5px 10px 18px #F0F0F0; width:70%; margin-left: 15.3%; color:#fffefe;" > Add/Upload </h2>
+</div>
 
 <br>
 <br>
 <br>
+<br>
+<br>
 
 
-<h2 style="text-align:center; margin-top:40px; " > Add/Upload </h2>
 
-<br>
-<br>
-<br>
-<br>
+{% comment %} display message when form is Succesfully submitted {% endcomment %}
+{% if img_obj %}  
+        <h3 align="center" style="margin-top:60px; display: inline; color:black; margin-left: 35%;">Succesfully submitted form with form id : <br>  <h2 align="center" style="margin-top:40px; color:green; display: inline; margin-left: 23.3%;">{{img_obj.form_id}}</h2></h3>  
+         {% comment %}<img  src="{{ img_obj.image.url}}" alt="connect" style="margin-right: auto; margin-left: auto; display: block; width: 50%; height: 50%">   {% endcomment %}
+         
+ {% endif %}
 
 
 {% comment %} FORM starts here {% endcomment %}
-<div class="form_class" style="background-color:#bfc1c2;  margin-top:60px; padding-left:2%; padding-top:9px; font-size:14px;">
+<div class="form_class" style="background-color:silver;  margin-top:60px; padding-left:2%; padding-top:9px; font-size:14px;">
 
-    <form method="post" enctype="multipart/form-data"  > 
-
-        {% csrf_token %}  
+    <form method="post" enctype="multipart/form-data" id="image_submission_form"  > 
 
         
-        
 
-{% comment %} <br> {% endcomment %}
-{% comment %} <br> {% endcomment %}
-        {% comment %} FORM fields {% endcomment %}
-          {% comment %} <span><dt id="form_id" > <h6 style="display: inline; margin-right: 0px"> Form_ID </h6> : {{ form.form_id }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> 
-
-          <h6 style="display: inline; cursor:pointer "> Type  </h6> : &nbsp; <select name="Massavi" id="Massavi"> 
-          <option value="" selected="selected">Massavi</option>
-          
-          </select> <span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-          
-
-
-          <span><h6 style="display: inline; px: 10px"> Image </h6> :  {% endcomment %}
-            {% comment %} <div class="form-input"> {% endcomment %}
-                {% comment %} <label for="file-ip-1">Upload Image</label> {% endcomment %}
-                
-                {% comment %} <input type="file" id="file-ip-1" accept="image/*" onchange="showPreview(event);" onchange="readURL(this);" {{form.image}}
-                <div class="preview ">
-                  
-                    <img id="file-ip-1-preview" style="display: block;margin-left: 60.6%;position: absolute;height: 508px;width: 505px;top: 360px;background-color:white;"> 
-                  
-                </div> {% endcomment %} 
-
-
-
-
-
-                
-            {% comment %} </div> {% endcomment %}
-    
-    
-
-    
-    {% comment %} Javascript function to preview image before uploading         {% endcomment %}
-    <script>
-        
-
-        function showPreview(event){
-
-            if(event.target.files.length > 0){
-                var src = URL.createObjectURL(event.target.files[0]);
-                var preview = document.getElementById("file-ip-1-preview");
-                preview.src = src;
-                preview.style.display = "block";
-                                            }
-                                            
-
-              
-                                        
-                                            
-                                            
-                                          }
-                                    
-
-
-    </script>  
-
-
-    
-
-
-    
-
-
-
-          
-          </dt></span>
-
-          {% comment %} <br>
-          <br>
-
-          <dt id="District"><span> 
-          <h6 style="display: inline; "> District </h6> :  
-          <select name="District" style="width:16%" id="select1"> 
-
-            <option>
-              {% for data in cities_name_list %}
-                  {{data}}
-              {% endfor %}
-            </option> 
-            
-          </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
             
 
-          <span> <h6 style="display: inline; "> Tehsil </h6> : 
-          <select name="Tehsil" id="Tehsil"> 
-            <option value="Rawalpindi" >Rawalpindi</option> </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
 
-          <span> <h6 style="display: inline; "> Patwar_Circle </h6> : 
-          <select name="Patwar_Circle" id="Patwar_Circle" style="width:11%"> 
-            <option value="Rawalpindi" >Rawalpindi</option> </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          
+          <h2> Form Already Exists </h2>
         
-          </span></dt>
+          
+          
+          
 
-          <br>
-          <br>
-
-          <dt id="Mauza"><span>
-          <h6 style="display: inline;"> Mauza </h6> : &nbsp; 
-          <select name="Mauza" style="width:15%" > 
-            <option value="Rawalpindi" >Rawalpindi</option> </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-          
-          <span> <h6 style="display: inline; "> Massavi_No </h6> : 
-          <select name="Massavi" id="Massavi"> 
-            <option value="Rawalpindi" >Rawalpindi</option> </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-          </span></dt>
-    
-            
-          
-           {% endcomment %}
-        
-          <tr>
-              <th><label hidden for="id_form_id">Form id:</label>
-                
-              <td>
-                
-                <input type="text" value="1" name="form_id" maxlength="100" required hidden id="id_form_id">
-               
-                
-              </td>
-            </tr>
-         
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <tr>
-              <th><label style="display: inline;" for="id_image">Image:</label></th>
-              <td>
-                
-                <input type="file" name="image" accept="image/*" id="id_image"  onchange="showPreview(event)" {{form.image}}
-                
-                  
-                    {% comment %} <img id="file-ip-1-preview" style="margin-left: 36.5%; height:400px; width:350px;background-color:white;">   {% endcomment %}
-                    
-                
-                
-              </td>
-            </tr>
-          
-            <tr>
-              <th><label style="display: inline;" for="id_type_data">Type data:</label></th>
-              <td>
-                
-                <input type="text" name="type_data" value="Massavi" maxlength="50" id="id_type_data">
-                
-                
-              </td>
-            </tr> 
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <tr>
-              <th><label for="id_district">District:</label></th>
-              <td>
-                
-                <select name="district" id="id_district">
-            <option value="">---------</option>
-          
-            <option value="Abbotabad" selected>Abbotabad</option>
-          
-            <option value="Bahawalpur">Bahawalpur</option>
-          
-            <option value="Charsaddah">Charsaddah</option>
-          
-            <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
-          
-            <option value="Faisalabad">Faisalabad</option>
-          
-            <option value="Gawadar">Gawadar</option>
-          
-            <option value="Islamabad">Islamabad</option>
-          
-            <option value="Rawalpindi">Rawalpindi</option>
-          
-            <option value="Karachi">Karachi</option>
-          
-            <option value="Faislabad">Faislabad</option>
-          
-            <option value="Lahore">Lahore</option>
-          
-            <option value="Multan">Multan</option>
-          
-          </select>
-                
-                
-              </td>
-            </tr>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <tr>
-              <th><label for="id_tehsil">Tehsil:</label></th>
-              <td>
-                
-                <select name="tehsil" id="id_tehsil">
-            <option value="">---------</option>
-          
-            <option value="Abbotabad">Abbotabad</option>
-          
-            <option value="Bahawalpur">Bahawalpur</option>
-          
-            <option value="Charsaddah" selected>Charsaddah</option>
-          
-            <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
-          
-            <option value="Faisalabad">Faisalabad</option>
-          
-            <option value="Gawadar">Gawadar</option>
-          
-            <option value="Islamabad">Islamabad</option>
-          
-            <option value="Rawalpindi">Rawalpindi</option>
-          
-            <option value="Karachi">Karachi</option>
-          
-            <option value="Faislabad">Faislabad</option>
-          
-            <option value="Lahore">Lahore</option>
-          
-            <option value="Multan">Multan</option>
-          
-          </select>
-                
-                
-              </td>
-            </tr>
-
-          <br>
-          <br>
-          <br>  
-
-            <tr>
-              <th><label for="id_patwar_circle">Patwar circle:</label></th>
-              <td>
-                
-                <select name="patwar_circle" id="id_patwar_circle">
-            <option value="">---------</option>
-          
-            <option value="Abbotabad">Abbotabad</option>
-          
-            <option value="Bahawalpur">Bahawalpur</option>
-          
-            <option value="Charsaddah">Charsaddah</option>
-          
-            <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
-          
-            <option value="Faisalabad">Faisalabad</option>
-          
-            <option value="Gawadar">Gawadar</option>
-          
-            <option value="Islamabad">Islamabad</option>
-          
-            <option value="Rawalpindi" selected>Rawalpindi</option>
-          
-            <option value="Karachi">Karachi</option>
-          
-            <option value="Faislabad">Faislabad</option>
-          
-            <option value="Lahore">Lahore</option>
-          
-            <option value="Multan">Multan</option>
-          
-          </select>
-                
-                
-              </td>
-            </tr>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <tr>
-              <th><label for="id_mauza">Mauza:</label></th>
-              <td>
-                
-                <select name="mauza" id="id_mauza">
-            <option value="">---------</option>
-          
-            <option value="Abbotabad" selected>Abbotabad</option>
-          
-            <option value="Bahawalpur">Bahawalpur</option>
-          
-            <option value="Charsaddah">Charsaddah</option>
-          
-            <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
-          
-            <option value="Faisalabad">Faisalabad</option>
-          
-            <option value="Gawadar">Gawadar</option>
-          
-            <option value="Islamabad">Islamabad</option>
-          
-            <option value="Rawalpindi">Rawalpindi</option>
-          
-            <option value="Karachi">Karachi</option>
-          
-            <option value="Faislabad">Faislabad</option>
-          
-            <option value="Lahore">Lahore</option>
-          
-            <option value="Multan">Multan</option>
-          
-          </select>
-                
-                
-              </td>
-            </tr>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <tr>
-              <th><label for="id_massavi_no">Massavi no:</label></th>
-              <td>
-                
-                <select name="massavi_no" id="id_massavi_no" >
-            <option value="">---------</option>
-          
-            <option value="Alif-1">Alif-1</option>
-          
-            <option value="Bay-1" selected>Bay-1</option>
-          
-            <option value="Jeem-1">Jeem-1</option>
-          
-            <option value="Daal-1">Daal-1</option>
-          
-            <option value="Hay-1">Hay-1</option>
-          
-            <option value="Wao-1">Wao-1</option>
-          
-          </select>
-
-          {% comment %} <button type="button" onclick = "get_value();"> Generate primary key </button> {% endcomment %}
-                
-                
-                  
-                
-              </td>
-            </tr>
-
-
-            {% comment %} <script>            {% endcomment %}
-
-              {% comment %} var form_id = document.getElementById('id_form_id').value; {% endcomment %}
-              {% comment %}var data_type = document.getElementById('id_type_data').value;
-              var district = document.getElementById('id_district').value;
-              var tehsil = document.getElementById('id_tehsil').value;
-              var patwar_circle = document.getElementById('id_patwar_circle').value;
-              var mauza = document.getElementById('id_mauza').value;
-              var massavi_no = document.getElementById('id_massavi_no').value;
-              console.log(massavi_no);
-              var all_data = data_type + "_" + district + "_" + tehsil + "_" + patwar_circle + "_" + mauza + "_" + massavi_no;
-              console.log(all_data);
-              
-
-              function get_value(){
-          
-                document.getElementById('id_form_id').value = all_data;
-                
-              
-              
-              }
-            </script>
-            <script>console.log(document.getElementById('id_form_id'))</script> {% endcomment %}
-
-
-
-          {% comment %} Submit button {% endcomment %}
-          <div class="button_upload" style="margin-left: 330px">
-            <button style="margin-top:90px; background-color: #008CBA; color:white; font-size:17px; margin-left: 26%; font-weight: bold;" class = "btn btn-primary" type="submit" >Submit Form</button></div>
-          
-          <br>
-
-          <img id="file-ip-1-preview" style="margin-left: 36.5%; height:400px; width:350px;background-color:white;"> 
+          {% comment %} <img id="file-ip-1-preview" style="display: block;margin-left: 59%;position: absolute;height: 508px;width: 470px;top: 380px;background-color:white;">  {% endcomment %}
 
 
 
@@ -541,234 +170,85 @@
 TO FETCH URL OF IMAGE 
 {% endcomment %} 
 
-                 {% comment %} <input type='file' onchange="readURL(this);" /> {% endcomment %}
                  <br />
                  <br /> 
                  
-                  {% comment %} <button id="toggleCanvasDisplay" onclick="toggleCanvas()">Hide canvas</button>  <button id="toggleDataUrl" onclick="toggleDataUrl()">Hide dataUrl</button>   {% endcomment %}
                  
-{% comment %} DECLARING 'SRC' as global variable {% endcomment %}
-
- 
-                 
- 
- {% comment %} <script>  
-let abc =  0
-  
- function readURL(input) {
-   if (input.files && input.files[0]) {
-     var reader = new FileReader();
- 
-     reader.addEventListener(
-       "load",
-       function() {
-         var avatarImg = new Image();
-         abc = reader.result;
-         avatarImg.src = abc;
-         document.getElementById("dataUrl").innerText = abc;
-         
-         
- 
-         avatarImg.onload = function() {
-           var c = document.getElementById("myCanvas");
-           var ctx = c.getContext("2d");
-           ctx.canvas.width = avatarImg.width;
-           ctx.canvas.height = avatarImg.height;
-           
-           ctx.drawImage(avatarImg, 0, 0);
-         };
-       },
-       false
-     );
-     
-     reader.readAsDataURL(input.files[0]);
-   }
- }
- 
- 
- </script> {% endcomment %}
-
- 
- 
-            
+          
 
     </form>  
 
 
-{% comment %} </div>
-
-<textarea  id="dataUrl" rows="4" cols="100">
-</textarea>
- 
-
-<canvas style="margin-left: 36.5%; height:400px; width:350px;" id="myCanvas"></canvas> {% endcomment %}
+</div>
+    
 
 
-
-{% comment %} ZOOM IMAGE like AMAZON, EBAY etc. 
-
-
- <div id="img-container" style="width: 400px; height:200px;">
-  <img src="http://127.0.0.1:8000/media/images/1_9qWh29G.jpg" />
-</div> 
-<script>
-
-var options1 = {
-  width: 400,
-  height: 400,
-  zoomWidth: 400,
-  zoomHeight: 20,
-  zoomType:'standard',
-  lens: true,
-  offset: {vertical: 50, horizontal: 100}
-};
-
-// If the width and height of the image are not known or to adjust the image to the container of it
-var options2 = {
-  fillContainer: false,
-  offset: {vertical: 20, horizontal: 50}
-};
-
-new ImageZoom(document.getElementById("img-container"), options1);
-
-</script>  
-
-{% endcomment %}
-
-
-
-
-
-
-
-
-
-
-
+<br>
 
 
 
 
 <!-- Error messaging -->
-{% if form.errors %}
+{% comment %} {% if not img_obj %}
             
     <div id="errors">
-      <div class="inner">
-          <h2 style="color:red;">ERROR:</h2>
+      <div class="inner" style="margin-left: 14.3%;">
+          <h2 style="color:red; margin-left: 128px;">ERROR:</h2>
           <ul style="color:black; font-size:22px;">
-              {% for field in form %}
-                  {% if field.errors %}
-                  <li >{{ field.label }}: {{ field.errors|striptags }}</li>
-                  {% endif %}
-              {% endfor %}
+              <h3 style="margin-left: 3%;">Form already exists</h3>
           </ul>
       </div>
     </div>
   
-{% endif %}
+{% endif %} {% endcomment %}
 
 
 
 
-{% comment %} display message when form is Succesfully submitted {% endcomment %}
-    {% if img_obj %}  
-        <h3 align="center" style="margin-top:60px; display: inline; color:black; margin-left: 128px;">Succesfully submitted form with form id : <h2 align="center" style="margin-top:40px; color:green; display: inline;">{{img_obj.form_id}}</h2></h3>  
-        {% comment %} <img  src="{{ img_obj.image.url}}" alt="connect" style="margin-right: auto; margin-left: auto; display: block; width: 50%; height: 50%">   {% endcomment %}
-    {% endif %}  
-
-
-
-
-    {% comment %} ZOOM IMAGE with + and - Buttons {% endcomment %}
-{% comment %} <script>
-
-  function zoomin(){
     
-    var myImg = document.getElementById("map");
-    var currWidth = myImg.clientWidth;
-    if(currWidth == 2500) return false;
-     else{
-        myImg.style.width = (currWidth + 100) + "px";
-    } 
-}
-  function zoomout(){
+
+{% comment %} <h3 align="center" style="margin-top:60px; display: inline; color:green; margin-left: 128px;"></h3>
+
+
     
-    var myImg = document.getElementById("map");
-    var currWidth = myImg.clientWidth;
-    if(currWidth == 100) return false;
-      else{
-        myImg.style.width = (currWidth - 100) + "px";
-    }
-}
 
-</script>
-
-<div id="navbar">
-  <button type="button" onclick="zoomin()"> <h6>+</h6> </button>
-  <button type="button" onclick="zoomout()"> <h6>--</h6> </button>
-  </div>
-  
-  <div class="main">
-  <img id="map" src="http://127.0.0.1:8000/media/images/1_9qWh29G.jpg" />
-</div>   {% endcomment %}
-
-
-
-
-
-
-
-<div class="zoom_outer">
-  <div id="zoom">
-    <img src="https://static.vecteezy.com/system/resources/previews/000/406/819/original/illustration-of-world-map-isolated-vector.jpg" alt="zoom">
-  </div>
-</div>
-<script>
-  var scale = 1,
-    panning = false,
-    pointX = 0,
-    pointY = 0,
-    start = { x: 0, y: 0 },
-    zoom = document.getElementById("zoom");
-  function setTransform() {
-    zoom.style.transform = "translate(" + pointX + "px, " + pointY + "px) scale(" + scale + ")";
-  }
-  zoom.onmousedown = function (e) {
-    e.preventDefault();
-    start = { x: e.clientX - pointX, y: e.clientY - pointY };
-    panning = true;
-  }
-  zoom.onmouseup = function (e) {
-    panning = false;
-  }
-  zoom.onmousemove = function (e) {
-    e.preventDefault();
-    if (!panning) {
-      return;
-    }
-    pointX = (e.clientX - start.x);
-    pointY = (e.clientY - start.y);
-    setTransform();
-  }
-  zoom.onwheel = function (e) {
-    e.preventDefault();
-    var xs = (e.clientX - pointX) / scale,
-      ys = (e.clientY - pointY) / scale,
-      delta = (e.wheelDelta ? e.wheelDelta : -e.deltaY);
-    (delta > 0) ? (scale *= 1.2) : (scale /= 1.2);
-    pointX = e.clientX - xs * scale;
-    pointY = e.clientY - ys * scale;
-    setTransform();
-  }
-</script>
-
-
-
-<div class="click-zoom">
-  <label>
-    <input type="checkbox">
-    <img src="https://via.placeholder.com/200">
-  </label>
-</div>
 </body>
+
+
+<script type="text/javascript">
+
+          $(document).on('submit', '#image_submission_form',function(e){
+
+            e.preventDefault();
+
+            $.ajax({
+                type:'POST',
+                url:'/create/',
+                
+                data:{
+                  form_id:$('#id_form_id').val(),
+                  image:$('#id_image').val(),
+                  type_data:$('#id_type_data').val(),
+                  district:$('#id_district').val(),
+                  tehsil:$('#id_tehsil').val(),
+                  patwar_circle:$('#id_patwar_circle').val(),
+                  mauza:$('#id_mauza').val(),
+                  massavi_no:$('#id_massavi_no').val(),
+                  csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success: function(data){
+                    $('h3').html(data)
+                }
+                
+                
+
+            });
+
+          });
+
+</script> {% endcomment %}
+
+
+
+
 </html>

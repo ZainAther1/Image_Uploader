@@ -9,12 +9,12 @@
 
 {% load imageuploader_extras %}
 
- <form method="GET" align="center" style="background:#d3d3d3;  ">
+ <form method="GET" align="center" style="background:#d3d3d3; padding-top: 3px; ">
   
         {% comment %} {{ filtered_images.form}} {% endcomment %}
   
         <tr>
-          <th><label for="id_time_now"><b>Date</b>(yyyy-mm-date)<b>:</b></label></th>
+          <th><label for="id_time_now" style="margin-left: 5px;">Date <b>(yyyy-mm-date)</b>:</label></th>
           <td>
             
             <input type="text" name="time_now" id="id_time_now">
@@ -24,7 +24,7 @@
         </tr>
       
         <tr>
-          <th><label for="id_district"><b>District:</b></label></th>
+          <th><label for="id_district">District:</label></th>
           <td>
             
             <select name="district" id="id_district">
@@ -61,7 +61,7 @@
         </tr>
       
         <tr>
-          <th><label for="id_tehsil"><b>Tehsil:</b></label></th>
+          <th><label for="id_tehsil">Tehsil:</label></th>
           <td>
             
             <select name="tehsil" id="id_tehsil">
@@ -98,7 +98,7 @@
         </tr>
       
         <tr>
-          <th><label for="id_patwar_circle"><b>Patwar circle:</b></label></th>
+          <th><label for="id_patwar_circle">Patwar circle:</label></th>
           <td>
             
             <select name="patwar_circle" id="id_patwar_circle">
@@ -135,7 +135,7 @@
         </tr>
       
         <tr>
-          <th><label for="id_mauza"><b>Mauza:</b></label></th>
+          <th><label for="id_mauza">Mauza:</label></th>
           <td>
             
             <select name="mauza" id="id_mauza">
@@ -172,7 +172,7 @@
         </tr>
       
         <tr>
-          <th><label for="id_massavi_no"><b>Massavi no:</b></label></th>
+          <th><label for="id_massavi_no">Massavi no:</label></th>
           <td>
             
             <select name="massavi_no" id="id_massavi_no">
@@ -202,13 +202,13 @@
         
         &nbsp;
         &nbsp;
-        
-        
-        
-        <button clas="btn btn-primary" type="Submit" style="background:#3cb371; color:white; margin-top: 1%; width:8%;">Search</button>
+
+
+
+        <button clas="btn btn-primary" type="Submit" style="margin-bottom: 7px;background:#3cb371; color:white; margin-top: 0.5%; width:8%;">Search</button>
       
       <br>
-      <br>
+
   
 </form> 
 

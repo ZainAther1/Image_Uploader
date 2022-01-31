@@ -1,9 +1,11 @@
+import json
+
 from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import redirect, render
 from imageuploader.forms import UserImageForm
-from .models import UploadImage
+# from .models import UploadImage
 
 from django.views.generic import ListView
 from imageuploader.models import UploadImage
@@ -52,20 +54,23 @@ def error(request):
 
 
 def image_request(request):
+    form = UserImageForm(request.POST, request.FILES)
     if request.method == 'POST':
         try:
             # submitbutton= request.POST.get("submit")
-            form = UserImageForm(request.POST, request.FILES)
             if form.is_valid():
-
-
                 # form.instance.district = request.user
                 form.save()
+<<<<<<< HEAD
                 district =  request.POST.get("district")
+=======
+                district = request.POST.get("district")
+>>>>>>> 1680ef2b2400d57621f915afb7cd8c03d49ab504
                 tehsil = request.POST.get("tehsil")
                 patwar_circle = request.POST.get("patwar_circle")
                 mauza = request.POST.get("mauza")
                 massavi_no = request.POST.get("massavi_no")
+<<<<<<< HEAD
                 #
                 # context = {'form': form, 'submitbutton': submitbutton, 'district':district, 'tehsil':tehsil, 'patwar_circle':patwar_circle, 'mauza':mauza, 'massavi_no':massavi_no}
 
@@ -77,6 +82,15 @@ def image_request(request):
                 mesage = ' Form submitted succesfully '+': '+district+'_'+tehsil+'_'+patwar_circle+'_'+mauza+'_'+massavi_no
 
                 messages.success(request, mesage )
+=======
+
+                context = {'id_district': district, 'id_tehsil': tehsil, 'id_patwar_circle': patwar_circle,
+                           'id_mauza': mauza, 'id_massavi_no': massavi_no}
+
+                # Getting the current instance object to display in the template
+                # img_object = form.instance
+                messages.success(request, ' Form submitted succesfully ')
+>>>>>>> 1680ef2b2400d57621f915afb7cd8c03d49ab504
                 return render(request, 'image_form.html', {'form': form, "form_data": json.dumps(context)})
 
                 # else:

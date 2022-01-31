@@ -18,6 +18,10 @@ from django.http import HttpResponse
 from .filters import UploadImageFilter
 from django.contrib import messages
 
+import json
+
+
+
 
 def index(request):
     return render(request, 'index.html')
@@ -57,18 +61,23 @@ def image_request(request):
 
                 # form.instance.district = request.user
                 form.save()
-                # district =  request.POST.get("district")
-                # tehsil = request.POST.get("tehsil")
-                # patwar_circle = request.POST.get("patwar_circle")
-                # mauza = request.POST.get("mauza")
-                # massavi_no = request.POST.get("massavi_no")
+                district =  request.POST.get("district")
+                tehsil = request.POST.get("tehsil")
+                patwar_circle = request.POST.get("patwar_circle")
+                mauza = request.POST.get("mauza")
+                massavi_no = request.POST.get("massavi_no")
                 #
                 # context = {'form': form, 'submitbutton': submitbutton, 'district':district, 'tehsil':tehsil, 'patwar_circle':patwar_circle, 'mauza':mauza, 'massavi_no':massavi_no}
 
                 # Getting the current instance object to display in the template
                 # img_object = form.instance
-                messages.success(request, ' Form submitted succesfully ')
-                return render(request, 'image_form.html', {'form':form})
+                context = {'id_district': district, 'id_tehsil': tehsil, 'id_patwar_circle': patwar_circle,
+                           'id_mauza': mauza, 'id_massavi_no': massavi_no}
+
+                mesage = ' Form submitted succesfully '+': '+district+'_'+tehsil+'_'+patwar_circle+'_'+mauza+'_'+massavi_no
+
+                messages.success(request, mesage )
+                return render(request, 'image_form.html', {'form': form, "form_data": json.dumps(context)})
 
                 # else:
             #     # print("form.errors:", form.errors)
@@ -80,8 +89,19 @@ def image_request(request):
         except IntegrityError:
             # message = 'Form already present'
             # return render(request, 'image_form.html', {'form': form,'message':'Form already present'})
-            messages.error(request, 'Form already exists')
+            district = request.POST.get("district")
+            tehsil = request.POST.get("tehsil")
+            patwar_circle = request.POST.get("patwar_circle")
+            mauza = request.POST.get("mauza")
+            massavi_no = request.POST.get("massavi_no")
+
+
+
+            message_error = ' Form already exists '+': '+ district+'_'+tehsil+'_'+patwar_circle+'_'+mauza+'_'+massavi_no
+
+            messages.error(request,message_error )
             # return HttpResponse('<h1 style="color: red;">Form already exists</h1>')
+
 
     else:
         form = UserImageForm()
@@ -150,7 +170,7 @@ def Images_List(request):
     filtered_images = UploadImageFilter(
 
         request.GET,
-        queryset=UploadImage.objects.all(),
+        queryset=UploadImage.objects.all().order_by('-time_now'),
 
     )
 
@@ -161,5 +181,8 @@ def Images_List(request):
     person_page_obj = paginated_filtered_entries.get_page(page_number)
 
     context['person_page_obj'] = person_page_obj
+
+    # servicesdata = UploadImage.objects.all().order_by('time_now')
+    # data = {'servicesdata':servicesdata}
 
     return render(request, 'imageuploader/uploadimage_list.html', context=context)

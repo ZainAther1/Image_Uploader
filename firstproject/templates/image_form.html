@@ -143,12 +143,12 @@
 
 
 {% comment %} display message when form is Succesfully submitted {% endcomment %}
-{% comment %} {% if img_obj %}  
-        <h2 align="center" style="margin-top:60px; display: inline; color:black; margin-left: 35%;"> <br> <div class="form_class" style="background-color:silver;  margin-top:60px; padding-left:2%; padding-top:9px; font-size:14px;">Succesfully submitted form with form id : </div></h2>
-          <h2 align="center" style="margin-top:40px; color:green; display: inline; margin-left: 23.3%;">{{img_obj.form_id}}</h2>  
-         {% comment %}<img  src="{{ img_obj.image.url}}" alt="connect" style="margin-right: auto; margin-left: auto; display: block; width: 50%; height: 50%">   {% endcomment %}
-  {% comment %}       
- {% endif %} {% endcomment %}
+{#{% if img_obj %}#}
+{#        <h2 align="center" style="margin-top:60px; display: inline; color:black; margin-left: 35%;"> <br> <div class="form_class" style="background-color:silver;  margin-top:60px; padding-left:2%; padding-top:9px; font-size:14px;">Succesfully submitted form with form id : </div></h2>#}
+{#          <h2 align="center" style="margin-top:40px; color:green; display: inline; margin-left: 23.3%;">{{img_obj.form_id}}</h2>  #}
+{#         {% comment %}<img  src="{{ img_obj.image.url}}" alt="connect" style="margin-right: auto; margin-left: auto; display: block; width: 50%; height: 50%">   {% endcomment %}#}
+{##}
+{# {% endif %}#}
 
 
 {% comment %} FORM starts here {% endcomment %}
@@ -160,32 +160,48 @@
 
         <br>
         <br>
-            <div id="canvas" class="zoom_outer" style="background:white; top:71.5%;">
+            <div id="canvas" class="zoom_outer" style="background:#f9f9f9; top:71.5%;">
               <div id="zoom" onchange="getImagePreview(event)">
                 <!-- <img src="" alt="zoom" width="300"> -->
               </div>
             </div>
-          </div>
+
         
       
         
         
-      <div class="container">  
+
         <script>
-      
-          function getImagePreview(event) {
+            document.addEventListener("DOMContentLoaded", function (event) {
+                getFormValues();
+            });
+
+
+
+
+            function getFormValues() {
+                const formData = {{ form_data|safe }};
+                for (var key in formData) {
+                    var fieldName = document.getElementById(key);
+                    fieldName.value = formData[key];
+                }
+            }
+
+        </script>
+        <script>
+            function getImagePreview(event) {
             // console.log(event.target.files[0])
-            var image = URL.createObjectURL(event.target.files[0]);
-            console.log(image);
-            var imagediv = document.getElementById("zoom");
-            var newimg = document.createElement('img');
-            imagediv.innerHTML = '';
-            newimg.src = image;
-            newimg.height = "508";
-            newimg.width = "470";
-            newimg.position = "absolute";
-            imagediv.appendChild(newimg);
-          }
+                var image = URL.createObjectURL(event.target.files[0]);
+                console.log(image);
+                var imagediv = document.getElementById("zoom");
+                var newimg = document.createElement('img');
+                imagediv.innerHTML = '';
+                newimg.src = image;
+                newimg.height = "508";
+                newimg.width = "470";
+                newimg.position = "absolute";
+                imagediv.appendChild(newimg);
+            }
       
           var scale = 1,
             panning = false,
@@ -236,14 +252,14 @@
       
             setTransform();
           }
-      
+
          
         </script>
-      </div>
+
       
 
 
-          </dt></span>
+
 
       <br>
       <br>
@@ -455,15 +471,612 @@
           
             <option value="Alif-1">Alif-1</option>
           
-            <option value="Bay-1" >Bay-1</option>
-          
-            <option value="Jeem-1">Jeem-1</option>
-          
-            <option value="Daal-1">Daal-1</option>
-          
-            <option value="Hay-1">Hay-1</option>
-          
-            <option value="Wao-1">Wao-1</option>
+            <option value="Alif-2">Alif-2</option>
+
+  <option value="Alif-3">Alif-3</option>
+
+  <option value="Alif-4">Alif-4</option>
+
+  <option value="Alif-5">Alif-5</option>
+
+  <option value="Alif-6">Alif-6</option>
+
+  <option value="Alif-7">Alif-7</option>
+
+  <option value="Alif-8">Alif-8</option>
+
+  <option value="Alif-9">Alif-9</option>
+
+  <option value="Alif-10">Alif-10</option>
+
+  <option value="Alif-11">Alif-11</option>
+
+  <option value="Alif-12">Alif-12</option>
+
+  <option value="Alif-13">Alif-13</option>
+
+  <option value="Alif-14">Alif-14</option>
+
+  <option value="Alif-15">Alif-15</option>
+
+  <option value="Alif-16">Alif-16</option>
+
+  <option value="Bay-1">Bay-1</option>
+
+  <option value="Bay-2">Bay-2</option>
+
+  <option value="Bay-3">Bay-3</option>
+
+  <option value="Bay-4">Bay-4</option>
+
+  <option value="Bay-5">Bay-5</option>
+
+  <option value="Bay-6">Bay-6</option>
+
+  <option value="Bay-7">Bay-7</option>
+
+  <option value="Bay-8">Bay-8</option>
+
+  <option value="Bay-9">Bay-9</option>
+
+  <option value="Bay-10">Bay-10</option>
+
+  <option value="Bay-11">Bay-11</option>
+
+  <option value="Bay-12">Bay-12</option>
+
+  <option value="Bay-13">Bay-13</option>
+
+  <option value="Bay-14">Bay-14</option>
+
+  <option value="Bay-15">Bay-15</option>
+
+  <option value="Bay-16">Bay-16</option>
+
+  <option value="Jeem-1">Jeem-1</option>
+
+  <option value="Jeem-2">Jeem-2</option>
+
+  <option value="Jeem-3">Jeem-3</option>
+
+  <option value="Jeem-4">Jeem-4</option>
+
+  <option value="Jeem-5">Jeem-5</option>
+
+  <option value="Jeem-6">Jeem-6</option>
+
+  <option value="Jeem-7">Jeem-7</option>
+
+  <option value="Jeem-8">Jeem-8</option>
+
+  <option value="Jeem-9">Jeem-9</option>
+
+  <option value="Jeem-10">Jeem-10</option>
+
+  <option value="Jeem-11">Jeem-11</option>
+
+  <option value="Jeem-12">Jeem-12</option>
+
+  <option value="Jeem-13">Jeem-13</option>
+
+  <option value="Jeem-14">Jeem-14</option>
+
+  <option value="Jeem-15">Jeem-15</option>
+
+  <option value="Jeem-16">Jeem-16</option>
+
+  <option value="Daal-1">Daal-1</option>
+
+  <option value="Daal-2">Daal-2</option>
+
+  <option value="Daal-3">Daal-3</option>
+
+  <option value="Daal-4">Daal-4</option>
+
+  <option value="Daal-5">Daal-5</option>
+
+  <option value="Daal-6">Daal-6</option>
+
+  <option value="Daal-7">Daal-7</option>
+
+  <option value="Daal-8">Daal-8</option>
+
+  <option value="Daal-9">Daal-9</option>
+
+  <option value="Daal-10">Daal-10</option>
+
+  <option value="Daal-11">Daal-11</option>
+
+  <option value="Daal-12">Daal-12</option>
+
+  <option value="Daal-13">Daal-13</option>
+
+  <option value="Daal-14">Daal-14</option>
+
+  <option value="Daal-15">Daal-15</option>
+
+  <option value="Daal-16">Daal-16</option>
+
+  <option value="Hay-1">Hay-1</option>
+
+  <option value="Hay-2">Hay-2</option>
+
+  <option value="Hay-3">Hay-3</option>
+
+  <option value="Hay-4">Hay-4</option>
+
+  <option value="Hay-5">Hay-5</option>
+
+  <option value="Hay-6">Hay-6</option>
+
+  <option value="Hay-7">Hay-7</option>
+
+  <option value="Hay-8">Hay-8</option>
+
+  <option value="Hay-9">Hay-9</option>
+
+  <option value="Hay-10">Hay-10</option>
+
+  <option value="Hay-11">Hay-11</option>
+
+  <option value="Hay-12">Hay-12</option>
+
+  <option value="Hay-13">Hay-13</option>
+
+  <option value="Hay-14">Hay-14</option>
+
+  <option value="Hay-15">Hay-15</option>
+
+  <option value="Hay-16">Hay-16</option>
+
+  <option value="Wao-1">Wao-1</option>
+
+  <option value="Wao-2">Wao-2</option>
+
+  <option value="Wao-3">Wao-3</option>
+
+  <option value="Wao-4">Wao-4</option>
+
+  <option value="Wao-5">Wao-5</option>
+
+  <option value="Wao-6">Wao-6</option>
+
+  <option value="Wao-7">Wao-7</option>
+
+  <option value="Wao-8">Wao-8</option>
+
+  <option value="Wao-9">Wao-9</option>
+
+  <option value="Wao-10">Wao-10</option>
+
+  <option value="Wao-11">Wao-11</option>
+
+  <option value="Wao-12">Wao-12</option>
+
+  <option value="Wao-13">Wao-13</option>
+
+  <option value="Wao-14">Wao-14</option>
+
+  <option value="Wao-15">Wao-15</option>
+
+  <option value="Wao-16">Wao-16</option>
+
+  <option value="Zay-1">Zay-1</option>
+
+  <option value="Zay-2">Zay-2</option>
+
+  <option value="Zay-3">Zay-3</option>
+
+  <option value="Zay-4">Zay-4</option>
+
+  <option value="Zay-5">Zay-5</option>
+
+  <option value="Zay-6">Zay-6</option>
+
+  <option value="Zay-7">Zay-7</option>
+
+  <option value="Zay-8">Zay-8</option>
+
+  <option value="Zay-9">Zay-9</option>
+
+  <option value="Zay-10">Zay-10</option>
+
+  <option value="Zay-11">Zay-11</option>
+
+  <option value="Zay-12">Zay-12</option>
+
+  <option value="Zay-13">Zay-13</option>
+
+  <option value="Zay-14">Zay-14</option>
+
+  <option value="Zay-15">Zay-15</option>
+
+  <option value="Zay-16">Zay-16</option>
+
+  <option value="Tuayn-1">Tuayn-1</option>
+
+  <option value="Tuayn-2">Tuayn-2</option>
+
+  <option value="Tuayn-3">Tuayn-3</option>
+
+  <option value="Tuayn-4">Tuayn-4</option>
+
+  <option value="Tuayn-5">Tuayn-5</option>
+
+  <option value="Tuayn-6">Tuayn-6</option>
+
+  <option value="Tuayn-7">Tuayn-7</option>
+
+  <option value="Tuayn-8">Tuayn-8</option>
+
+  <option value="Tuayn-9">Tuayn-9</option>
+
+  <option value="Tuayn-10">Tuayn-10</option>
+
+  <option value="Tuayn-11">Tuayn-11</option>
+
+  <option value="Tuayn-12">Tuayn-12</option>
+
+  <option value="Tuayn-13">Tuayn-13</option>
+
+  <option value="Tuayn-14">Tuayn-14</option>
+
+  <option value="Tuayn-15">Tuayn-15</option>
+
+  <option value="Tuayn-16">Tuayn-16</option>
+
+  <option value="Yay-1">Yay-1</option>
+
+  <option value="Yay-2">Yay-2</option>
+
+  <option value="Yay-3">Yay-3</option>
+
+  <option value="Yay-4">Yay-4</option>
+
+  <option value="Yay-5">Yay-5</option>
+
+  <option value="Yay-6">Yay-6</option>
+
+  <option value="Yay-7">Yay-7</option>
+
+  <option value="Yay-8">Yay-8</option>
+
+  <option value="Yay-9">Yay-9</option>
+
+  <option value="Yay-10">Yay-10</option>
+
+  <option value="Yay-11">Yay-11</option>
+
+  <option value="Yay-12">Yay-12</option>
+
+  <option value="Yay-13">Yay-13</option>
+
+  <option value="Yay-14">Yay-14</option>
+
+  <option value="Yay-15">Yay-15</option>
+
+  <option value="Yay-16">Yay-16</option>
+
+  <option value="Kaaf-1">Kaaf-1</option>
+
+  <option value="Kaaf-2">Kaaf-2</option>
+
+  <option value="Kaaf-3">Kaaf-3</option>
+
+  <option value="Kaaf-4">Kaaf-4</option>
+
+  <option value="Kaaf-5">Kaaf-5</option>
+
+  <option value="Kaaf-6">Kaaf-6</option>
+
+  <option value="Kaaf-7">Kaaf-7</option>
+
+  <option value="Kaaf-8">Kaaf-8</option>
+
+  <option value="Kaaf-9">Kaaf-9</option>
+
+  <option value="Kaaf-10">Kaaf-10</option>
+
+  <option value="Kaaf-11">Kaaf-11</option>
+
+  <option value="Kaaf-12">Kaaf-12</option>
+
+  <option value="Kaaf-13">Kaaf-13</option>
+
+  <option value="Kaaf-14">Kaaf-14</option>
+
+  <option value="Kaaf-15">Kaaf-15</option>
+
+  <option value="Kaaf-16">Kaaf-16</option>
+
+  <option value="Laam-1">Laam-1</option>
+
+  <option value="Laam-2">Laam-2</option>
+
+  <option value="Laam-3">Laam-3</option>
+
+  <option value="Laam-4">Laam-4</option>
+
+  <option value="Laam-5">Laam-5</option>
+
+  <option value="Laam-6">Laam-6</option>
+
+  <option value="Laam-7">Laam-7</option>
+
+  <option value="Laam-8">Laam-8</option>
+
+  <option value="Laam-9">Laam-9</option>
+
+  <option value="Laam-10">Laam-10</option>
+
+  <option value="Laam-11">Laam-11</option>
+
+  <option value="Laam-12">Laam-12</option>
+
+  <option value="Laam-13">Laam-13</option>
+
+  <option value="Laam-14">Laam-14</option>
+
+  <option value="Laam-15">Laam-15</option>
+
+  <option value="Laam-16">Laam-16</option>
+
+  <option value="Meem-1">Meem-1</option>
+
+  <option value="Meem-2">Meem-2</option>
+
+  <option value="Meem-3">Meem-3</option>
+
+  <option value="Meem-4">Meem-4</option>
+
+  <option value="Meem-5">Meem-5</option>
+
+  <option value="Meem-6">Meem-6</option>
+
+  <option value="Meem-7">Meem-7</option>
+
+  <option value="Meem-8">Meem-8</option>
+
+  <option value="Meem-9">Meem-9</option>
+
+  <option value="Meem-10">Meem-10</option>
+
+  <option value="Meem-11">Meem-11</option>
+
+  <option value="Meem-12">Meem-12</option>
+
+  <option value="Meem-13">Meem-13</option>
+
+  <option value="Meem-14">Meem-14</option>
+
+  <option value="Meem-15">Meem-15</option>
+
+  <option value="Meem-16">Meem-16</option>
+
+  <option value="Noon-1">Noon-1</option>
+
+  <option value="Noon-2">Noon-2</option>
+
+  <option value="Noon-3">Noon-3</option>
+
+  <option value="Noon-4">Noon-4</option>
+
+  <option value="Noon-5">Noon-5</option>
+
+  <option value="Noon-6">Noon-6</option>
+
+  <option value="Noon-7">Noon-7</option>
+
+  <option value="Noon-8">Noon-8</option>
+
+  <option value="Noon-9">Noon-9</option>
+
+  <option value="Noon-10">Noon-10</option>
+
+  <option value="Noon-11">Noon-11</option>
+
+  <option value="Noon-12">Noon-12</option>
+
+  <option value="Noon-13">Noon-13</option>
+
+  <option value="Noon-14">Noon-14</option>
+
+  <option value="Noon-15">Noon-15</option>
+
+  <option value="Noon-16">Noon-16</option>
+
+  <option value="Seen-1">Seen-1</option>
+
+  <option value="Seen-2">Seen-2</option>
+
+  <option value="Seen-3">Seen-3</option>
+
+  <option value="Seen-4">Seen-4</option>
+
+  <option value="Seen-5">Seen-5</option>
+
+  <option value="Seen-6">Seen-6</option>
+
+  <option value="Seen-7">Seen-7</option>
+
+  <option value="Seen-8">Seen-8</option>
+
+  <option value="Seen-9">Seen-9</option>
+
+  <option value="Seen-10">Seen-10</option>
+
+  <option value="Seen-11">Seen-11</option>
+
+  <option value="Seen-12">Seen-12</option>
+
+  <option value="Seen-13">Seen-13</option>
+
+  <option value="Seen-14">Seen-14</option>
+
+  <option value="Seen-15">Seen-15</option>
+
+  <option value="Seen-16">Seen-16</option>
+
+  <option value="Ayn-1">Ayn-1</option>
+
+  <option value="Ayn-2">Ayn-2</option>
+
+  <option value="Ayn-3">Ayn-3</option>
+
+  <option value="Ayn-4">Ayn-4</option>
+
+  <option value="Ayn-5">Ayn-5</option>
+
+  <option value="Ayn-6">Ayn-6</option>
+
+  <option value="Ayn-7">Ayn-7</option>
+
+  <option value="Ayn-8">Ayn-8</option>
+
+  <option value="Ayn-9">Ayn-9</option>
+
+  <option value="Ayn-10">Ayn-10</option>
+
+  <option value="Ayn-11">Ayn-11</option>
+
+  <option value="Ayn-12">Ayn-12</option>
+
+  <option value="Ayn-13">Ayn-13</option>
+
+  <option value="Ayn-14">Ayn-14</option>
+
+  <option value="Ayn-15">Ayn-15</option>
+
+  <option value="Ayn-16">Ayn-16</option>
+
+  <option value="Fay-1">Fay-1</option>
+
+  <option value="Fay-2">Fay-2</option>
+
+  <option value="Fay-3">Fay-3</option>
+
+  <option value="Fay-4">Fay-4</option>
+
+  <option value="Fay-5">Fay-5</option>
+
+  <option value="Fay-6">Fay-6</option>
+
+  <option value="Fay-7">Fay-7</option>
+
+  <option value="Fay-8">Fay-8</option>
+
+  <option value="Fay-9">Fay-9</option>
+
+  <option value="Fay-10">Fay-10</option>
+
+  <option value="Fay-11">Fay-11</option>
+
+  <option value="Fay-12">Fay-12</option>
+
+  <option value="Fay-13">Fay-13</option>
+
+  <option value="Fay-14">Fay-14</option>
+
+  <option value="Fay-15">Fay-15</option>
+
+  <option value="Fay-16">Fay-16</option>
+
+  <option value="Suaad-1">Suaad-1</option>
+
+  <option value="Suaad-2">Suaad-2</option>
+
+  <option value="Suaad-3">Suaad-3</option>
+
+  <option value="Suaad-4">Suaad-4</option>
+
+  <option value="Suaad-5">Suaad-5</option>
+
+  <option value="Suaad-6">Suaad-6</option>
+
+  <option value="Suaad-7">Suaad-7</option>
+
+  <option value="Suaad-8">Suaad-8</option>
+
+  <option value="Suaad-9">Suaad-9</option>
+
+  <option value="Suaad-10">Suaad-10</option>
+
+  <option value="Suaad-11">Suaad-11</option>
+
+  <option value="Suaad-12">Suaad-12</option>
+
+  <option value="Suaad-13">Suaad-13</option>
+
+  <option value="Suaad-14">Suaad-14</option>
+
+  <option value="Suaad-15">Suaad-15</option>
+
+  <option value="Suaad-16">Suaad-16</option>
+
+  <option value="Qaaf-1">Qaaf-1</option>
+
+  <option value="Qaaf-2">Qaaf-2</option>
+
+  <option value="Qaaf-3">Qaaf-3</option>
+
+  <option value="Qaaf-4">Qaaf-4</option>
+
+  <option value="Qaaf-5">Qaaf-5</option>
+
+  <option value="Qaaf-6">Qaaf-6</option>
+
+  <option value="Qaaf-7">Qaaf-7</option>
+
+  <option value="Qaaf-8">Qaaf-8</option>
+
+  <option value="Qaaf-9">Qaaf-9</option>
+
+  <option value="Qaaf-10">Qaaf-10</option>
+
+  <option value="Qaaf-11">Qaaf-11</option>
+
+  <option value="Qaaf-12">Qaaf-12</option>
+
+  <option value="Qaaf-13">Qaaf-13</option>
+
+  <option value="Qaaf-14">Qaaf-14</option>
+
+  <option value="Qaaf-15">Qaaf-15</option>
+
+  <option value="Qaaf-16">Qaaf-16</option>
+
+  <option value="Ray-1">Ray-1</option>
+
+  <option value="Ray-2">Ray-2</option>
+
+  <option value="Ray-3">Ray-3</option>
+
+  <option value="Ray-4">Ray-4</option>
+
+  <option value="Ray-5">Ray-5</option>
+
+  <option value="Ray-6">Ray-6</option>
+
+  <option value="Ray-7">Ray-7</option>
+
+  <option value="Ray-8">Ray-8</option>
+
+  <option value="Ray-9">Ray-9</option>
+
+  <option value="Ray-10">Ray-10</option>
+
+  <option value="Ray-11">Ray-11</option>
+
+  <option value="Ray-12">Ray-12</option>
+
+  <option value="Ray-13">Ray-13</option>
+
+  <option value="Ray-14">Ray-14</option>
+
+  <option value="Ray-15">Ray-15</option>
+
+  <option value="Ray-16">Ray-16</option>
+
 
             <option value="None">None</option>
 
@@ -536,7 +1149,6 @@
 
 
 <br>
-
 
 
 

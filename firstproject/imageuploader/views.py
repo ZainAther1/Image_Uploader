@@ -1,9 +1,11 @@
+import json
+
 from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import redirect, render
 from imageuploader.forms import UserImageForm
-from .models import UploadImage
+# from .models import UploadImage
 
 from django.views.generic import ListView
 from imageuploader.models import UploadImage
@@ -48,27 +50,26 @@ def error(request):
 
 
 def image_request(request):
+    form = UserImageForm(request.POST, request.FILES)
     if request.method == 'POST':
         try:
             # submitbutton= request.POST.get("submit")
-            form = UserImageForm(request.POST, request.FILES)
             if form.is_valid():
-
-
                 # form.instance.district = request.user
                 form.save()
-                # district =  request.POST.get("district")
-                # tehsil = request.POST.get("tehsil")
-                # patwar_circle = request.POST.get("patwar_circle")
-                # mauza = request.POST.get("mauza")
-                # massavi_no = request.POST.get("massavi_no")
-                #
-                # context = {'form': form, 'submitbutton': submitbutton, 'district':district, 'tehsil':tehsil, 'patwar_circle':patwar_circle, 'mauza':mauza, 'massavi_no':massavi_no}
+                district = request.POST.get("district")
+                tehsil = request.POST.get("tehsil")
+                patwar_circle = request.POST.get("patwar_circle")
+                mauza = request.POST.get("mauza")
+                massavi_no = request.POST.get("massavi_no")
+
+                context = {'id_district': district, 'id_tehsil': tehsil, 'id_patwar_circle': patwar_circle,
+                           'id_mauza': mauza, 'id_massavi_no': massavi_no}
 
                 # Getting the current instance object to display in the template
                 # img_object = form.instance
                 messages.success(request, ' Form submitted succesfully ')
-                return render(request, 'image_form.html', {'form':form})
+                return render(request, 'image_form.html', {'form': form, "form_data": json.dumps(context)})
 
                 # else:
             #     # print("form.errors:", form.errors)

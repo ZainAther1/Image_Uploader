@@ -1,11 +1,9 @@
-import json
-
 from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import redirect, render
 from imageuploader.forms import UserImageForm
-# from .models import UploadImage
+from .models import UploadImage
 
 from django.views.generic import ListView
 from imageuploader.models import UploadImage
@@ -21,6 +19,11 @@ from .filters import UploadImageFilter
 from django.contrib import messages
 
 import json
+
+
+from PIL import  Image,ImageFont, ImageDraw
+
+
 
 
 
@@ -54,24 +57,33 @@ def error(request):
 
 
 def image_request(request):
-    form = UserImageForm(request.POST, request.FILES)
     if request.method == 'POST':
         try:
             # submitbutton= request.POST.get("submit")
+            form = UserImageForm(request.POST, request.FILES)
             if form.is_valid():
+
                 # form.instance.district = request.user
                 form.save()
-<<<<<<< HEAD
                 district =  request.POST.get("district")
-=======
-                district = request.POST.get("district")
->>>>>>> 1680ef2b2400d57621f915afb7cd8c03d49ab504
                 tehsil = request.POST.get("tehsil")
                 patwar_circle = request.POST.get("patwar_circle")
                 mauza = request.POST.get("mauza")
                 massavi_no = request.POST.get("massavi_no")
-<<<<<<< HEAD
-                #
+                image = request.POST.get("image")
+
+                image1 = Image.open(image)
+                draw = ImageDraw.Draw(image1)
+
+                # specified font size
+                font = ImageFont.truetype(r'C:\Users\dell\Downloads\Sometime.ttf', 40)
+
+                text = 'LAUGHING IS THE \n BEST MEDICINE'
+
+                # drawing text size
+                draw.text((10, 10), text, fill="red", font=font, align="right")
+
+                # image.show()
                 # context = {'form': form, 'submitbutton': submitbutton, 'district':district, 'tehsil':tehsil, 'patwar_circle':patwar_circle, 'mauza':mauza, 'massavi_no':massavi_no}
 
                 # Getting the current instance object to display in the template
@@ -79,18 +91,12 @@ def image_request(request):
                 context = {'id_district': district, 'id_tehsil': tehsil, 'id_patwar_circle': patwar_circle,
                            'id_mauza': mauza, 'id_massavi_no': massavi_no}
 
+                all_in = district + '_' + tehsil + '_' + patwar_circle + '_' + mauza + '_' + massavi_no
+
                 mesage = ' Form submitted succesfully '+': '+district+'_'+tehsil+'_'+patwar_circle+'_'+mauza+'_'+massavi_no
 
                 messages.success(request, mesage )
-=======
 
-                context = {'id_district': district, 'id_tehsil': tehsil, 'id_patwar_circle': patwar_circle,
-                           'id_mauza': mauza, 'id_massavi_no': massavi_no}
-
-                # Getting the current instance object to display in the template
-                # img_object = form.instance
-                messages.success(request, ' Form submitted succesfully ')
->>>>>>> 1680ef2b2400d57621f915afb7cd8c03d49ab504
                 return render(request, 'image_form.html', {'form': form, "form_data": json.dumps(context)})
 
                 # else:

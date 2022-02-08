@@ -1,120 +1,131 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
 
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" >
 
     {% comment %} <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script> {% endcomment %}
+   
+    
+
+    
+
+    <meta https-equiv="X-UA-Compatible" content="ie=edge" />
 
 
-    <meta https-equiv="X-UA-Compatible" content="ie=edge"/>
-
-
+      
     <style>
 
+      
+        
+     
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        
+      }
+      #zoom {
+        width: 100%;
+        height: 100%;
+        transform-origin: 0px 0px;
+        transform: scale(1) translate(0px, 0px);
+        cursor: grab;
+      }
+      div#zoom > img {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        display: inline-block;
+        overflow: hidden;
+        border: solid black 1px;
+      }
+      
+      
+      #canvas{
 
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
+        width: 470px;
+        height: 530px;
+        overflow: hidden;
+        display: block;
+        margin-left: 63.3%;
+        position: absolute;
+        top: 420px;
+        background: white;
+        border: solid black 1px;}
 
-        }
+      #form_shape{
 
-        #zoom {
-            width: 100%;
-            height: 100%;
-            transform-origin: 0px 0px;
-            transform: scale(1) translate(0px, 0px);
-            cursor: grab;
-        }
-
-        div#zoom > img {
-            width: 100%;
-            height: auto;
-            overflow: hidden;
-            display: inline-block;
-            overflow: hidden;
-            border: solid black 1px;
-        }
-
-
-        #canvas {
-
-            width: 470px;
-            height: 530px;
-            overflow: hidden;
-            display: block;
-            margin-left: 63.3%;
-            position: absolute;
-            top: 420px;
-            background: white;
-            border: solid black 1px;
-        }
-
-        #form_shape {
-
-            background: white;
-        }
+        background: white;
+      }
 
     </style>
 
     {% comment %} style="display: block;margin-left: 59%;position: absolute;height: 508px;width: 470px;top: 380px;background-color:white;" {% endcomment %}
+      
 
 
-    <title> {% block title %} {% endblock title %}</title>
-</head>
-<body style="background-color:#f1efa8">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">GIS Solutions</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+    <title> {%block title%} {% endblock title %}</title>
+  </head>
+  <body style="background-color:#f1efa8">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">GIS Solutions</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/">Home</a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link " href="/add/">Add/Upload</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/list/">List</a>
-                </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+              </li>
+              
+              
+              <li class="nav-item">
+                <a class="nav-link " href="/add/">Add/Upload</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/list/">List</a>
+              </li>
             </ul>
-
+            
+          </div>
         </div>
-    </div>
-</nav>
+      </nav>
+  
+  
 
 
+
+<br>    
 <br>
 <br>
 <br>
 <br>
-<br>
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-dismissible alert-success">
-            <h5 align=center>{{ message }}</h5>
-        </div>
-    {% endfor %}
-{% endif %}
+
 <div class="container">
-    <h2 style="text-align:center; font-size: 25px; margin-top:40px; background: #3cb371; padding-top: 12px;padding-bottom: 12px;border-radius: 25px; box-shadow: 5px 10px 18px #F0F0F0; width:38%; margin-left: 32.3%; color:#fffefe;">
-        Add/Upload </h2>
+  <h2 style="text-align:center; font-size: 25px; margin-top:40px; background: #3cb371; padding-top: 12px;padding-bottom: 12px;border-radius: 25px; box-shadow: 5px 10px 18px #F0F0F0; width:38%; margin-left: 32.3%; color:#fffefe;" > Add/Upload </h2>
 </div>
 
 <br>
@@ -124,37 +135,29 @@
 <br>
 
 
+
 {% comment %} display message when form is Succesfully submitted {% endcomment %}
-<<<<<<< HEAD
 {#{% if img_obj %}#}
 {#        <h2 align="center" style="margin-top:60px; display: inline; color:black; margin-left: 35%;"> <br> <div class="form_class" style="background-color:silver;  margin-top:60px; padding-left:2%; padding-top:9px; font-size:14px;">Succesfully submitted form with form id : </div></h2>#}
 {#          <h2 align="center" style="margin-top:40px; color:green; display: inline; margin-left: 23.3%;">{{img_obj.form_id}}</h2>  #}
 {#         {% comment %}<img  src="{{ img_obj.image.url}}" alt="connect" style="margin-right: auto; margin-left: auto; display: block; width: 50%; height: 50%">   {% endcomment %}#}
 {##}
 {# {% endif %}#}
-=======
-{% comment %} {% if img_obj %}  
-        <h2 align="center" style="margin-top:60px; display: inline; color:black; margin-left: 35%;"> <br> <div class="form_class" style="background-color:silver;  margin-top:60px; padding-left:2%; padding-top:9px; font-size:14px;">Succesfully submitted form with form id : </div></h2>
-          <h2 align="center" style="margin-top:40px; color:green; display: inline; margin-left: 23.3%;">{{img_obj.form_id}}</h2>  
-         {% comment %}<img  src="{{ img_obj.image.url}}" alt="connect" style="margin-right: auto; margin-left: auto; display: block; width: 50%; height: 50%">   {% endcomment %}
-{% comment %}
- {% endif %} {% endcomment %}
->>>>>>> 1680ef2b2400d57621f915afb7cd8c03d49ab504
 
 
 {% comment %} FORM starts here {% endcomment %}
 
-<form method="post" enctype="multipart/form-data" id="image_submission_form">
+    <form method="post" enctype="multipart/form-data" id="image_submission_form"  > 
 
-    {% csrf_token %}
+        {% csrf_token %}  
 
 
-<<<<<<< HEAD
         <br>
         <br>
             <div id="canvas" class="zoom_outer" style="background:#f9f9f9; top:71.5%;">
               <div id="zoom" onchange="getImagePreview(event)">
-                <!-- <img src="" alt="zoom" width="300"> -->
+
+
               </div>
             </div>
 
@@ -163,30 +166,14 @@
         
         
 
-=======
-    <br>
-    <br>
-    <div id="canvas" class="zoom_outer" style="background:white; top:71.5%;">
-        <div id="zoom" onchange="getImagePreview(event)">
-            <!-- <img src="" alt="zoom" width="300"> -->
-        </div>
-    </div>
-    </div>
-
-
-    <div class="container">
->>>>>>> 1680ef2b2400d57621f915afb7cd8c03d49ab504
         <script>
             document.addEventListener("DOMContentLoaded", function (event) {
                 getFormValues();
             });
 
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 1680ef2b2400d57621f915afb7cd8c03d49ab504
             function getFormValues() {
                 const formData = {{ form_data|safe }};
                 for (var key in formData) {
@@ -195,15 +182,17 @@
                 }
             }
 
-<<<<<<< HEAD
         </script>
+
+{#        <canvas id="canvas1" style="width:640px; height:340px;"></canvas>#}
+
         <script>
+
+
+
+
             function getImagePreview(event) {
-            // console.log(event.target.files[0])
-=======
-            function getImagePreview(event) {
-                // console.log(event.target.files[0])
->>>>>>> 1680ef2b2400d57621f915afb7cd8c03d49ab504
+
                 var image = URL.createObjectURL(event.target.files[0]);
                 console.log(image);
                 var imagediv = document.getElementById("zoom");
@@ -214,9 +203,39 @@
                 newimg.width = "470";
                 newimg.position = "absolute";
                 imagediv.appendChild(newimg);
+
+                {#console.log(image);#}
+
+                {#return image;#}
             }
-<<<<<<< HEAD
-      
+
+            {#var myResult = getImagePreview();#}
+            {#getImagePreview();#}
+{#            console.log(getImagePreview());#}
+
+            {#// function to display a text on image#}
+            {#function addTextToImage(imagePath, text) {#}
+            {#    var circle_canvas1 = document.getElementById("canvas1");#}
+            {#    var context = circle_canvas1.getContext("2d");#}
+            {##}
+            {#    // Draw Image function#}
+            {#    var img = new Image();#}
+            {#    img.src = imagePath;#}
+            {#    img.onload = function () {#}
+            {#        context.drawImage(img, 0, 0);#}
+            {#        context.lineWidth = 1;#}
+            {#        context.fillStyle = "#CC00FF";#}
+            {#        context.lineStyle = "#ffff00";#}
+            {#        context.font = "11px arial";#}
+            {#        context.fillText(text, 10, 20);#}
+            {#    };#}
+
+            {#text1 = "Gawadar_Gawadar_Ankara_Ankara Junoobi_B-6"#}
+            {#addTextToImage("data:image/jpeg;base64,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", text1 );#}
+
+
+
+
           var scale = 1,
             panning = false,
             pointX = 0,
@@ -227,9 +246,9 @@
       
           function setTransform() {
             zoom.style.transform = "translate(" + pointX + "px, " + pointY + "px) scale(" + scale + ")";
-          } 
-        
-          
+          }
+
+
           
           
       
@@ -270,205 +289,447 @@
          
         </script>
 
+
+{#        <canvas id="canvas1" style="width:640px; height:340px;"></canvas>#}
+{##}
+{#        <script>#}
+{#            function addTextToImage(imagePath, text) {#}
+{#                var circle_canvas1 = document.getElementById("canvas1");#}
+{#                var context = circle_canvas1.getContext("2d");#}
+{##}
+{#                // Draw Image function#}
+{#                var img = new Image();#}
+{#                img.src = imagePath;#}
+{#                img.onload = function () {#}
+{#                    context.drawImage(img, 0, 0);#}
+{#                    context.lineWidth = 1;#}
+{#                    context.fillStyle = "#CC00FF";#}
+{#                    context.lineStyle = "#ffff00";#}
+{#                    context.font = "18px sans-serif";#}
+{#                    context.fillText(text, 50, 50);#}
+{#                };#}
+{#            }#}
+{#text1 = "1111111111111111"#}
+{#addTextToImage(image, text1 );#}
+{#        </script>#}
+
       
 
 
 
-=======
 
-            var scale = 1,
-                panning = false,
-                pointX = 0,
-                pointY = 0,
-                start = {x: 0, y: 0},
-                zoom = document.getElementById("zoom");
-
-
-            function setTransform() {
-                zoom.style.transform = "translate(" + pointX + "px, " + pointY + "px) scale(" + scale + ")";
-            }
-
-
-            zoom.onmousedown = function (e) {
-
-                start = {x: e.clientX - pointX, y: e.clientY - pointY};
-                panning = true;
-            }
-
-            zoom.onmouseup = function (e) {
-                start = {x: e.clientX - pointX, y: e.clientY - pointY};
-                panning = false;
-            }
-
-            zoom.onmousemove = function (e) {
-                e.preventDefault();
-                if (!panning) {
-                    return;
-                }
-                pointX = (e.clientX - start.x);
-                pointY = (e.clientY - start.y);
-                setTransform();
-            }
-
-            zoom.onwheel = function (e) {
-                e.preventDefault();
-                var xs = (e.clientX - pointX) / scale,
-                    ys = (e.clientY - pointY) / scale,
-                    delta = (e.wheelDelta ? e.wheelDelta : -e.deltaY);
-                (delta > 0) ? (scale *= 1.2) : (scale /= 1.2);
-
-
-                setTransform();
-
-            }
-        </script>
-    </div>
-
-
-    </dt></span>
-
-    <br>
-    <br>
-    <br>
-
-    <div class="form_shape" id="form_shape"
-         style="background:#c1dbd4;width: 60%;margin-left: 1.4%;margin-top: 30px;border-style: ridge;padding-top: 5.2%; padding-bottom: 3%;">
-        <tr>
-            <th><label hidden for="id_form_id">Form id:</label>
-
-            <td>
->>>>>>> 1680ef2b2400d57621f915afb7cd8c03d49ab504
-
+      <br>
+      <br>
+      <br>
+                
+      <div class="form_shape" id="form_shape" style="background:#c1dbd4;width: 60%;margin-left: 1.4%;margin-top: 30px;border-style: ridge;padding-top: 5.2%; padding-bottom: 3%;">
+          <tr> 
+              <th><label hidden for="id_form_id">Form id:</label>
+                
+              <td>
+                
                 <input type="text" value="1" name="form_id" maxlength="100" hidden required id="id_form_id">
-            </td>
-        </tr>
-        <tr>
-            <th><label style="display: inline; margin-left:4%;" for="id_type_data">Data Type:</label></th>
-            <td>
+               
+                
+              </td>
+            </tr>
+         
 
+              
+          
+            <tr>
+              <th><label style="display: inline; margin-left:4%;" for="id_type_data">Data Type:</label></th>
+              <td>
+                
                 <input type="text" name="type_data" readonly value="Massavi" maxlength="50" id="id_type_data">
+                
+                
+              </td>
+            </tr> 
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
 
-
-            </td>
-        </tr>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-
-        <tr>
-            <th>
-                <label for="id_district">District:</label></th>
-            <td>
+                        <tr>
+              <th><label for="id_district">District:</label></th>
+              <td>
+                
                 <select name="district" id="id_district">
-                    <option value="{{ context.district }}">{{ context.district }}</option>
-                    <option value="Abbotabad">Abbotabad</option>
-                    <option value="Bahawalpur">Bahawalpur</option>
-                    <option value="Charsaddah">Charsaddah</option>
-                    <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
-                    <option value="Faisalabad">Faisalabad</option>
-                    <option value="Gawadar">Gawadar</option>
-                    <option value="Islamabad">Islamabad</option>
-                    <option value="Rawalpindi">Rawalpindi</option>
-                    <option value="Karachi">Karachi</option>
-                    <option value="Lahore">Lahore</option>
-                    <option value="Multan">Multan</option>
-                    <option value="None">None</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th><label for="id_tehsil">Tehsil:</label></th>
-            <td>
+          
 
+
+  <option value="Gawadar">Gawadar</option>
+
+  <option value="Jaffarabad">Jaffarabad</option>
+
+  <option value="Pishin">Pishin</option>
+
+  <option value="Quetta">Quetta</option>
+
+            <option value="None">None</option>
+          
+          </select>
+                
+                
+              </td>
+            </tr>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+
+
+            <tr>
+              <th><label for="id_tehsil">Tehsil:</label></th>
+              <td>
+                
                 <select name="tehsil" id="id_tehsil" style="width:18.5%;">
+          
+            <option value="Gawadar">Gawadar</option>
 
-                    <option value="Abbotabad">Abbotabad</option>
+  <option value="Jiwani">Jiwani</option>
 
-                    <option value="Bahawalpur">Bahawalpur</option>
+  <option value="Ormara">Ormara</option>
 
-                    <option value="Charsaddah">Charsaddah</option>
+  <option value="Pasni">Pasni</option>
 
-                    <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+            <option value="None">None</option>
+          
+          </select>
+                
+                
+              </td>
+            </tr>
 
-                    <option value="Faisalabad">Faisalabad</option>
+          <br>
+          <br>
+          <br>  
+          <br>
 
-                    <option value="Gawadar">Gawadar</option>
-
-                    <option value="Islamabad">Islamabad</option>
-
-                    <option value="Rawalpindi">Rawalpindi</option>
-
-                    <option value="Karachi">Karachi</option>
-
-                    <option value="Lahore">Lahore</option>
-
-                    <option value="Multan">Multan</option>
-
-                    <option value="None">None</option>
-
-                </select>
-
-
-            </td>
-        </tr>
-        <br>
-        <br>
-        <br>
-        <br>
-        <tr>
-            <th><label style="display: inline; margin-left:4.1%;" for="id_patwar_circle">Patwar circle:</label></th>
-            <td>
+            <tr>
+              <th><label style="display: inline; margin-left:4.1%;" for="id_patwar_circle">Patwar circle:</label></th>
+              <td>
+                
                 <select name="patwar_circle" id="id_patwar_circle" style="width:20.1%;">
-                    <option value="Abbotabad">Abbotabad</option>
-                    <option value="Bahawalpur">Bahawalpur</option>
-                    <option value="Charsaddah">Charsaddah</option>
-                    <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
-                    <option value="Faisalabad">Faisalabad</option>
-                    <option value="Gawadar">Gawadar</option>
-                    <option value="Islamabad">Islamabad</option>
-                    <option value="Rawalpindi">Rawalpindi</option>
-                    <option value="Karachi">Karachi</option>
-                    <option value="Lahore">Lahore</option>
-                    <option value="Multan">Multan</option>
-                    <option value="None">None</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th><label for="id_mauza" style="margin-left:0.3%;">Mauza:</label></th>
-            <td>
+          
+              <option value="Ankara">Ankara</option>
 
+  <option value="Chatti">Chatti</option>
+
+  <option value="Chib Kalamati">Chib Kalamati</option>
+
+  <option value="City">City</option>
+
+  <option value="Dhor Ghatti">Dhor Ghatti</option>
+
+  <option value="Gurandani">Gurandani</option>
+
+  <option value="Jorkaan">Jorkaan</option>
+
+  <option value="Karwaat">Karwaat</option>
+
+  <option value="Ormara">Ormara</option>
+
+  <option value="Paleri">Paleri</option>
+
+  <option value="Pishukaan">Pishukaan</option>
+
+  <option value="Settlement">Settlement</option>
+
+  <option value="Shaabi">Shaabi</option>
+
+  <option value="Surbandar">Surbandar</option>
+
+            <option value="None">None</option>
+          
+          </select>
+                
+                
+              </td>
+            </tr>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+
+
+            
+            
+                        <tr>
+              <th><label for="id_mauza" style="margin-left:0.3%;">Mauza:</label></th>
+              <td>
+                
                 <select name="mauza" id="id_mauza" style="width:17.6%;">
+          
 
-                    <option value="Abbotabad">Abbotabad</option>
+  <option value="Ankara Junoobi">Ankara Junoobi</option>
 
-                    <option value="Bahawalpur">Bahawalpur</option>
+  <option value="Ankara Shumali">Ankara Shumali</option>
 
-                    <option value="Charsaddah">Charsaddah</option>
+  <option value="Chatti Junoobi">Chatti Junoobi</option>
 
-                    <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+  <option value="Chatti Shumali">Chatti Shumali</option>
 
-                    <option value="Faisalabad">Faisalabad</option>
+  <option value="Darbela Shumali">Darbela Shumali</option>
 
-                    <option value="Gawadar">Gawadar</option>
+  <option value="Kappar Gharbi">Kappar Gharbi</option>
 
-                    <option value="Islamabad">Islamabad</option>
+  <option value="Kappar Sharqi">Kappar Sharqi</option>
 
-                    <option value="Rawalpindi">Rawalpindi</option>
+  <option value="Mouza Baan">Mouza Baan</option>
 
-                    <option value="Karachi">Karachi</option>
+  <option value="Mouza Ballada">Mouza Ballada</option>
 
-                    <option value="Lahore">Lahore</option>
+  <option value="Mouza Bandari">Mouza Bandari</option>
 
-                    <option value="Multan">Multan</option>
+  <option value="Mouza Bandi">Mouza Bandi</option>
 
-                    <option value="None">None</option>
+  <option value="Mouza Basool">Mouza Basool</option>
 
-                </select>
+  <option value="Mouza Chakkuli">Mouza Chakkuli</option>
+
+  <option value="Mouza Chandi">Mouza Chandi</option>
+
+  <option value="Mouza Cheb Rakhani">Mouza Cheb Rakhani</option>
+
+  <option value="Mouza Chib Kalmati">Mouza Chib Kalmati</option>
+
+  <option value="Mouza Chukken">Mouza Chukken</option>
+
+  <option value="Mouza Chullani">Mouza Chullani</option>
+
+  <option value="Mouza Churbandar">Mouza Churbandar</option>
+
+  <option value="Mouza Daat">Mouza Daat</option>
+
+  <option value="Mouza Darbela Junoobi">Mouza Darbela Junoobi</option>
+
+  <option value="Mouza Door Ghatti">Mouza Door Ghatti</option>
+
+  <option value="Mouza Dosi">Mouza Dosi</option>
+
+  <option value="Mouza Espiyak">Mouza Espiyak</option>
+
+  <option value="Mouza Faqeerabad">Mouza Faqeerabad</option>
+
+  <option value="Mouza Ganz">Mouza Ganz</option>
+
+  <option value="Mouza Garook">Mouza Garook</option>
+
+  <option value="Mouza Garruki">Mouza Garruki</option>
+
+  <option value="Mouza Gazdaan Bal">Mouza Gazdaan Bal</option>
+
+  <option value="Mouza Ghamarwo">Mouza Ghamarwo</option>
+
+  <option value="Mouza Ghatti">Mouza Ghatti</option>
+
+  <option value="Mouza Ghoorhad">Mouza Ghoorhad</option>
+
+  <option value="Mouza Gurandani Junoobi">Mouza Gurandani Junoobi</option>
+
+  <option value="Mouza Gurrani">Mouza Gurrani</option>
+
+  <option value="Mouza Haegani">Mouza Haegani</option>
+
+  <option value="Mouza Jaffary">Mouza Jaffary</option>
+
+  <option value="Mouza Jahoorkan">Mouza Jahoorkan</option>
+
+  <option value="Mouza Kahoordan">Mouza Kahoordan</option>
+
+  <option value="Mouza Kalmat">Mouza Kalmat</option>
+
+  <option value="Mouza Kandalik">Mouza Kandalik</option>
+
+  <option value="Mouza Kandasol">Mouza Kandasol</option>
+
+  <option value="Mouza Kargoshki">Mouza Kargoshki</option>
+
+  <option value="Mouza Keya Kalaat">Mouza Keya Kalaat</option>
+
+  <option value="Mouza Kunnar Bal">Mouza Kunnar Bal</option>
+
+  <option value="Mouza Maazwar">Mouza Maazwar</option>
+
+  <option value="Mouza Makola Garbi">Mouza Makola Garbi</option>
+
+  <option value="Mouza Makola Sharqi">Mouza Makola Sharqi</option>
+
+  <option value="Mouza Maro">Mouza Maro</option>
+
+  <option value="Mouza Mazzhani">Mouza Mazzhani</option>
+
+  <option value="Mouza Mhal">Mouza Mhal</option>
+
+  <option value="Mouza Nalient Sher Muhammad Bazar">Mouza Nalient Sher Muhammad Bazar</option>
+
+  <option value="Mouza Nigore Shareef">Mouza Nigore Shareef</option>
+
+  <option value="Mouza Okar">Mouza Okar</option>
+
+  <option value="Mouza Ormara">Mouza Ormara</option>
+
+  <option value="Mouza Paleri Gharbi">Mouza Paleri Gharbi</option>
+
+  <option value="Mouza Paleri Sharqi">Mouza Paleri Sharqi</option>
+
+  <option value="Mouza Panwan">Mouza Panwan</option>
+
+  <option value="Mouza Passo">Mouza Passo</option>
+
+  <option value="Mouza Pishal">Mouza Pishal</option>
+
+  <option value="Mouza Pishukaan">Mouza Pishukaan</option>
+
+  <option value="Mouza Praheen Tohk">Mouza Praheen Tohk</option>
+
+  <option value="Mouza Qalandari">Mouza Qalandari</option>
+
+  <option value="Mouza Rach">Mouza Rach</option>
+
+  <option value="Mouza Robar">Mouza Robar</option>
+
+  <option value="Mouza Rombdo">Mouza Rombdo</option>
+
+  <option value="Mouza Sahiji Faqeer Muhammad Bazar">Mouza Sahiji Faqeer Muhammad Bazar</option>
+
+  <option value="Mouza Sahiji Hassan Bazar">Mouza Sahiji Hassan Bazar</option>
+
+  <option value="Mouza Sarchash">Mouza Sarchash</option>
+
+  <option value="Mouza Shaabi">Mouza Shaabi</option>
+
+  <option value="Mouza Shadi Kaur">Mouza Shadi Kaur</option>
+
+  <option value="Mouza Shadikaur Junoobi">Mouza Shadikaur Junoobi</option>
+
+  <option value="Mouza Sham">Mouza Sham</option>
+
+  <option value="Mouza Shanekani Dar">Mouza Shanekani Dar</option>
+
+  <option value="Mouza Shatangi">Mouza Shatangi</option>
+
+  <option value="Mouza Shumal Bandan">Mouza Shumal Bandan</option>
+
+  <option value="Mouza Sukhni">Mouza Sukhni</option>
+
+  <option value="Mouza Surbandar">Mouza Surbandar</option>
+
+  <option value="Mouza Tank">Mouza Tank</option>
+
+  <option value="Mouza Thsk">Mouza Thsk</option>
+
+  <option value="Mouza Washeen Dor">Mouza Washeen Dor</option>
+
+  <option value="Mouza Zareen">Mouza Zareen</option>
+
+  <option value="Mouza Ziarat Machi Gharbi">Mouza Ziarat Machi Gharbi</option>
+
+  <option value="Mouza Ziarat Machi Sharqi">Mouza Ziarat Machi Sharqi</option>
+
+  <option value="Ward Assa">Ward Assa</option>
+
+  <option value="Ward Bagh Bazar Junoobi">Ward Bagh Bazar Junoobi</option>
+
+  <option value="Ward Bagh Bazar Shumali">Ward Bagh Bazar Shumali</option>
+
+  <option value="Ward Baloch">Ward Baloch</option>
+
+  <option value="Ward Bangla Bazar">Ward Bangla Bazar</option>
+
+  <option value="Ward Captain Murad Baksh">Ward Captain Murad Baksh</option>
+
+  <option value="Ward Gazrawan">Ward Gazrawan</option>
+
+  <option value="Ward Ghulam Sarwar Muhalla Junoobi">Ward Ghulam Sarwar Muhalla Junoobi</option>
+
+  <option value="Ward Habib Lashkari">Ward Habib Lashkari</option>
+
+  <option value="Ward Ismailia">Ward Ismailia</option>
+
+  <option value="Ward Kareem Baksh">Ward Kareem Baksh</option>
+
+  <option value="Ward Khauda Amanullah">Ward Khauda Amanullah</option>
+
+  <option value="Ward Kohbun">Ward Kohbun</option>
+
+  <option value="Ward Kohsar Garbi">Ward Kohsar Garbi</option>
+
+  <option value="Ward Kohsar Sharqi">Ward Kohsar Sharqi</option>
+
+  <option value="Ward Kolgari">Ward Kolgari</option>
+
+  <option value="Ward Kummadi">Ward Kummadi</option>
+
+  <option value="Ward Mahigeeran Garbi">Ward Mahigeeran Garbi</option>
+
+  <option value="Ward Mir Lal Baksh">Ward Mir Lal Baksh</option>
+
+  <option value="Ward Mir Rehmat Garbi">Ward Mir Rehmat Garbi</option>
+
+  <option value="Ward Mujahid">Ward Mujahid</option>
+
+  <option value="Ward Mullah Band">Ward Mullah Band</option>
+
+  <option value="Ward Mullah Hashim">Ward Mullah Hashim</option>
+
+  <option value="Ward Naguman">Ward Naguman</option>
+
+  <option value="Ward Navy">Ward Navy</option>
+
+  <option value="Ward Negwari">Ward Negwari</option>
+
+  <option value="Ward Ormari Junobi">Ward Ormari Junobi</option>
+
+  <option value="Ward Ormari Shumali">Ward Ormari Shumali</option>
+
+  <option value="Ward Prahag Muhallah">Ward Prahag Muhallah</option>
+
+  <option value="Ward Purana Market">Ward Purana Market</option>
+
+  <option value="Ward Qazi Rehmat Sharqi">Ward Qazi Rehmat Sharqi</option>
+
+  <option value="Ward Raeesani">Ward Raeesani</option>
+
+  <option value="Ward Saleh Muhammad">Ward Saleh Muhammad</option>
+
+  <option value="Ward Senator Ishaq">Ward Senator Ishaq</option>
+
+  <option value="Ward Shadoband">Ward Shadoband</option>
+
+  <option value="Ward Shambay Ismail">Ward Shambay Ismail</option>
+
+  <option value="Ward Shehzada Bazar Janoobi">Ward Shehzada Bazar Janoobi</option>
+
+  <option value="Ward Sheikh Umer">Ward Sheikh Umer</option>
+
+  <option value="Ward Sohrabi">Ward Sohrabi</option>
+
+  <option value="Ward Thana">Ward Thana</option>
+
+  <option value="Ward Tobag">Ward Tobag</option>
+
+  <option value="Ward Usmania">Ward Usmania</option>
+
+  <option value="Ward Zahoor Shah Hashmi">Ward Zahoor Shah Hashmi</option>
+
+  <option value="Ward Zobag Muhalla Junoobi">Ward Zobag Muhalla Junoobi</option>
+
+            <option value="None">None</option>
+          
+          </select>
+                
+                
+              </td>
+            </tr>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
 
 
-<<<<<<< HEAD
             
             
             
@@ -478,703 +739,829 @@
                 
                 <select name="massavi_no" id="id_massavi_no" style="width:13.3%;" >
           
-            <option value="Alif-1">Alif-1</option>
+
+
+  <option value="A-1">A-1</option>
+
+  <option value="A-2">A-2</option>
+
+  <option value="A-3">A-3</option>
+
+  <option value="A-4">A-4</option>
+
+  <option value="A-5">A-5</option>
+
+  <option value="A-6">A-6</option>
+
+  <option value="A-7">A-7</option>
+
+  <option value="A-8">A-8</option>
+
+  <option value="A-9">A-9</option>
+
+  <option value="A-10">A-10</option>
+
+  <option value="A-11">A-11</option>
+
+  <option value="A-12">A-12</option>
+
+  <option value="A-13">A-13</option>
+
+  <option value="A-14">A-14</option>
+
+  <option value="A-15">A-15</option>
+
+  <option value="A-16">A-16</option>
+
+  <option value="B-1">B-1</option>
+
+  <option value="B-2">B-2</option>
+
+  <option value="B-3">B-3</option>
+
+  <option value="B-4">B-4</option>
+
+  <option value="B-5">B-5</option>
+
+  <option value="B-6">B-6</option>
+
+  <option value="B-7">B-7</option>
+
+  <option value="B-8">B-8</option>
+
+  <option value="B-9">B-9</option>
+
+  <option value="B-10">B-10</option>
+
+  <option value="B-11">B-11</option>
+
+  <option value="B-12">B-12</option>
+
+  <option value="B-13">B-13</option>
+
+  <option value="B-14">B-14</option>
+
+  <option value="B-15">B-15</option>
+
+  <option value="B-16">B-16</option>
+
+  <option value="J-1">J-1</option>
+
+  <option value="J-2">J-2</option>
+
+  <option value="J-3">J-3</option>
+
+  <option value="J-4">J-4</option>
+
+  <option value="J-5">J-5</option>
+
+  <option value="J-6">J-6</option>
+
+  <option value="J-7">J-7</option>
+
+  <option value="J-8">J-8</option>
+
+  <option value="J-9">J-9</option>
+
+  <option value="J-10">J-10</option>
+
+  <option value="J-11">J-11</option>
+
+  <option value="J-12">J-12</option>
+
+  <option value="J-13">J-13</option>
+
+  <option value="J-14">J-14</option>
+
+  <option value="J-15">J-15</option>
+
+  <option value="J-16">J-16</option>
+
+  <option value="D-1">D-1</option>
+
+  <option value="D-2">D-2</option>
+
+  <option value="D-3">D-3</option>
+
+  <option value="D-4">D-4</option>
+
+  <option value="D-5">D-5</option>
+
+  <option value="D-6">D-6</option>
+
+  <option value="D-7">D-7</option>
+
+  <option value="D-8">D-8</option>
+
+  <option value="D-9">D-9</option>
+
+  <option value="D-10">D-10</option>
+
+  <option value="D-11">D-11</option>
+
+  <option value="D-12">D-12</option>
+
+  <option value="D-13">D-13</option>
+
+  <option value="D-14">D-14</option>
+
+  <option value="D-15">D-15</option>
+
+  <option value="D-16">D-16</option>
+
+  <option value="H-1">H-1</option>
+
+  <option value="H-2">H-2</option>
+
+  <option value="H-3">H-3</option>
+
+  <option value="H-4">H-4</option>
+
+  <option value="H-5">H-5</option>
+
+  <option value="H-6">H-6</option>
+
+  <option value="H-7">H-7</option>
+
+  <option value="H-8">H-8</option>
+
+  <option value="H-9">H-9</option>
+
+  <option value="H-10">H-10</option>
+
+  <option value="H-11">H-11</option>
+
+  <option value="H-12">H-12</option>
+
+  <option value="H-13">H-13</option>
+
+  <option value="H-14">H-14</option>
+
+  <option value="H-15">H-15</option>
+
+  <option value="H-16">H-16</option>
+
+  <option value="W-1">W-1</option>
+
+  <option value="W-2">W-2</option>
+
+  <option value="W-3">W-3</option>
+
+  <option value="W-4">W-4</option>
+
+  <option value="W-5">W-5</option>
+
+  <option value="W-6">W-6</option>
+
+  <option value="W-7">W-7</option>
+
+  <option value="W-8">W-8</option>
+
+  <option value="W-9">W-9</option>
+
+  <option value="W-10">W-10</option>
+
+  <option value="W-11">W-11</option>
+
+  <option value="W-12">W-12</option>
+
+  <option value="W-13">W-13</option>
+
+  <option value="W-14">W-14</option>
+
+  <option value="W-15">W-15</option>
+
+  <option value="W-16">W-16</option>
+
+  <option value="Z-1">Z-1</option>
+
+  <option value="Z-2">Z-2</option>
+
+  <option value="Z-3">Z-3</option>
+
+  <option value="Z-4">Z-4</option>
+
+  <option value="Z-5">Z-5</option>
+
+  <option value="Z-6">Z-6</option>
+
+  <option value="Z-7">Z-7</option>
+
+  <option value="Z-8">Z-8</option>
+
+  <option value="Z-9">Z-9</option>
+
+  <option value="Z-10">Z-10</option>
+
+  <option value="Z-11">Z-11</option>
+
+  <option value="Z-12">Z-12</option>
+
+  <option value="Z-13">Z-13</option>
+
+  <option value="Z-14">Z-14</option>
+
+  <option value="Z-15">Z-15</option>
+
+  <option value="Z-16">Z-16</option>
+
+  <option value="T-1">T-1</option>
+
+  <option value="T-2">T-2</option>
+
+  <option value="T-3">T-3</option>
+
+  <option value="T-4">T-4</option>
+
+  <option value="T-5">T-5</option>
+
+  <option value="T-6">T-6</option>
+
+  <option value="T-7">T-7</option>
+
+  <option value="T-8">T-8</option>
+
+  <option value="T-9">T-9</option>
+
+  <option value="T-10">T-10</option>
+
+  <option value="T-11">T-11</option>
+
+  <option value="T-12">T-12</option>
+
+  <option value="T-13">T-13</option>
+
+  <option value="T-14">T-14</option>
+
+  <option value="T-15">T-15</option>
+
+  <option value="T-16">T-16</option>
+
+  <option value="Y-1">Y-1</option>
+
+  <option value="Y-2">Y-2</option>
+
+  <option value="Y-3">Y-3</option>
+
+  <option value="Y-4">Y-4</option>
+
+  <option value="Y-5">Y-5</option>
+
+  <option value="Y-6">Y-6</option>
+
+  <option value="Y-7">Y-7</option>
+
+  <option value="Y-8">Y-8</option>
+
+  <option value="Y-9">Y-9</option>
+
+  <option value="Y-10">Y-10</option>
+
+  <option value="Y-11">Y-11</option>
+
+  <option value="Y-12">Y-12</option>
+
+  <option value="Y-13">Y-13</option>
+
+  <option value="Y-14">Y-14</option>
+
+  <option value="Y-15">Y-15</option>
+
+  <option value="Y-16">Y-16</option>
+
+  <option value="K-1">K-1</option>
+
+  <option value="K-2">K-2</option>
+
+  <option value="K-3">K-3</option>
+
+  <option value="K-4">K-4</option>
+
+  <option value="K-5">K-5</option>
+
+  <option value="K-6">K-6</option>
+
+  <option value="K-7">K-7</option>
+
+  <option value="K-8">K-8</option>
+
+  <option value="K-9">K-9</option>
+
+  <option value="K-10">K-10</option>
+
+  <option value="K-11">K-11</option>
+
+  <option value="K-12">K-12</option>
+
+  <option value="K-13">K-13</option>
+
+  <option value="K-14">K-14</option>
+
+  <option value="K-15">K-15</option>
+
+  <option value="K-16">K-16</option>
+
+  <option value="L-1">L-1</option>
+
+  <option value="L-2">L-2</option>
+
+  <option value="L-3">L-3</option>
+
+  <option value="L-4">L-4</option>
+
+  <option value="L-5">L-5</option>
+
+  <option value="L-6">L-6</option>
+
+  <option value="L-7">L-7</option>
+
+  <option value="L-8">L-8</option>
+
+  <option value="L-9">L-9</option>
+
+  <option value="L-10">L-10</option>
+
+  <option value="L-11">L-11</option>
+
+  <option value="L-12">L-12</option>
+
+  <option value="L-13">L-13</option>
+
+  <option value="L-14">L-14</option>
+
+  <option value="L-15">L-15</option>
+
+  <option value="L-16">L-16</option>
+
+  <option value="M-1">M-1</option>
+
+  <option value="M-2">M-2</option>
+
+  <option value="M-3">M-3</option>
+
+  <option value="M-4">M-4</option>
+
+  <option value="M-5">M-5</option>
+
+  <option value="M-6">M-6</option>
+
+  <option value="M-7">M-7</option>
+
+  <option value="M-8">M-8</option>
+
+  <option value="M-9">M-9</option>
+
+  <option value="M-10">M-10</option>
+
+  <option value="M-11">M-11</option>
+
+  <option value="M-12">M-12</option>
+
+  <option value="M-13">M-13</option>
+
+  <option value="M-14">M-14</option>
+
+  <option value="M-15">M-15</option>
+
+  <option value="M-16">M-16</option>
+
+  <option value="N-1">N-1</option>
+
+  <option value="N-2">N-2</option>
+
+  <option value="N-3">N-3</option>
+
+  <option value="N-4">N-4</option>
+
+  <option value="N-5">N-5</option>
+
+  <option value="N-6">N-6</option>
+
+  <option value="N-7">N-7</option>
+
+  <option value="N-8">N-8</option>
+
+  <option value="N-9">N-9</option>
+
+  <option value="N-10">N-10</option>
+
+  <option value="N-11">N-11</option>
+
+  <option value="N-12">N-12</option>
+
+  <option value="N-13">N-13</option>
+
+  <option value="N-14">N-14</option>
+
+  <option value="N-15">N-15</option>
+
+  <option value="N-16">N-16</option>
+
+  <option value="S-1">S-1</option>
+
+  <option value="S-2">S-2</option>
+
+  <option value="S-3">S-3</option>
+
+  <option value="S-4">S-4</option>
+
+  <option value="S-5">S-5</option>
+
+  <option value="S-6">S-6</option>
+
+  <option value="S-7">S-7</option>
+
+  <option value="S-8">S-8</option>
+
+  <option value="S-9">S-9</option>
+
+  <option value="S-10">S-10</option>
+
+  <option value="S-11">S-11</option>
+
+  <option value="S-12">S-12</option>
+
+  <option value="S-13">S-13</option>
+
+  <option value="S-14">S-14</option>
+
+  <option value="S-15">S-15</option>
+
+  <option value="S-16">S-16</option>
+
+  <option value="E-1">E-1</option>
+
+  <option value="E-2">E-2</option>
+
+  <option value="E-3">E-3</option>
+
+  <option value="E-4">E-4</option>
+
+  <option value="E-5">E-5</option>
+
+  <option value="E-6">E-6</option>
+
+  <option value="E-7">E-7</option>
+
+  <option value="E-8">E-8</option>
+
+  <option value="E-9">E-9</option>
+
+  <option value="E-10">E-10</option>
+
+  <option value="E-11">E-11</option>
+
+  <option value="E-12">E-12</option>
+
+  <option value="E-13">E-13</option>
+
+  <option value="E-14">E-14</option>
+
+  <option value="E-15">E-15</option>
+
+  <option value="E-16">E-16</option>
+
+  <option value="F-1">F-1</option>
+
+  <option value="F-2">F-2</option>
+
+  <option value="F-3">F-3</option>
+
+  <option value="F-4">F-4</option>
+
+  <option value="F-5">F-5</option>
+
+  <option value="F-6">F-6</option>
+
+  <option value="F-7">F-7</option>
+
+  <option value="F-8">F-8</option>
+
+  <option value="F-9">F-9</option>
+
+  <option value="F-10">F-10</option>
+
+  <option value="F-11">F-11</option>
+
+  <option value="F-12">F-12</option>
+
+  <option value="F-13">F-13</option>
+
+  <option value="F-14">F-14</option>
+
+  <option value="F-15">F-15</option>
+
+  <option value="F-16">F-16</option>
+
+  <option value="SW-1">SW-1</option>
+
+  <option value="SW-2">SW-2</option>
+
+  <option value="SW-3">SW-3</option>
+
+  <option value="SW-4">SW-4</option>
+
+  <option value="SW-5">SW-5</option>
+
+  <option value="SW-6">SW-6</option>
+
+  <option value="SW-7">SW-7</option>
+
+  <option value="SW-8">SW-8</option>
+
+  <option value="SW-9">SW-9</option>
+
+  <option value="SW-10">SW-10</option>
+
+  <option value="SW-11">SW-11</option>
+
+  <option value="SW-12">SW-12</option>
+
+  <option value="SW-13">SW-13</option>
+
+  <option value="SW-14">SW-14</option>
+
+  <option value="SW-15">SW-15</option>
+
+  <option value="SW-16">SW-16</option>
+
+  <option value="Q-1">Q-1</option>
+
+  <option value="Q-2">Q-2</option>
+
+  <option value="Q-3">Q-3</option>
+
+  <option value="Q-4">Q-4</option>
+
+  <option value="Q-5">Q-5</option>
+
+  <option value="Q-6">Q-6</option>
+
+  <option value="Q-7">Q-7</option>
+
+  <option value="Q-8">Q-8</option>
+
+  <option value="Q-9">Q-9</option>
+
+  <option value="Q-10">Q-10</option>
+
+  <option value="Q-11">Q-11</option>
+
+  <option value="Q-12">Q-12</option>
+
+  <option value="Q-13">Q-13</option>
+
+  <option value="Q-14">Q-14</option>
+
+  <option value="Q-15">Q-15</option>
+
+  <option value="Q-16">Q-16</option>
+
+  <option value="R-1">R-1</option>
+
+  <option value="R-2">R-2</option>
+
+  <option value="R-3">R-3</option>
+
+  <option value="R-4">R-4</option>
+
+  <option value="R-5">R-5</option>
+
+  <option value="R-6">R-6</option>
+
+  <option value="R-7">R-7</option>
+
+  <option value="R-8">R-8</option>
+
+  <option value="R-9">R-9</option>
+
+  <option value="R-10">R-10</option>
+
+  <option value="R-11">R-11</option>
+
+  <option value="R-12">R-12</option>
+
+  <option value="R-13">R-13</option>
+
+  <option value="R-14">R-14</option>
+
+  <option value="R-15">R-15</option>
+
+  <option value="R-16">R-16</option>
+
+  <option value="HI-1">HI-1</option>
+
+  <option value="HI-2">HI-2</option>
+
+  <option value="HI-3">HI-3</option>
+
+  <option value="HI-4">HI-4</option>
+
+  <option value="HI-5">HI-5</option>
+
+  <option value="HI-6">HI-6</option>
+
+  <option value="HI-7">HI-7</option>
+
+  <option value="HI-8">HI-8</option>
+
+  <option value="HI-9">HI-9</option>
+
+  <option value="HI-10">HI-10</option>
+
+  <option value="HI-11">HI-11</option>
+
+  <option value="HI-12">HI-12</option>
+
+  <option value="HI-13">HI-13</option>
+
+  <option value="HI-14">HI-14</option>
+
+  <option value="HI-15">HI-15</option>
+
+  <option value="HI-16">HI-16</option>
+
+  <option value="SH-1">SH-1</option>
+
+  <option value="SH-2">SH-2</option>
+
+  <option value="SH-3">SH-3</option>
+
+  <option value="SH-4">SH-4</option>
+
+  <option value="SH-5">SH-5</option>
+
+  <option value="SH-6">SH-6</option>
+
+  <option value="SH-7">SH-7</option>
+
+  <option value="SH-8">SH-8</option>
+
+  <option value="SH-9">SH-9</option>
+
+  <option value="SH-10">SH-10</option>
+
+  <option value="SH-11">SH-11</option>
+
+  <option value="SH-12">SH-12</option>
+
+  <option value="SH-13">SH-13</option>
+
+  <option value="SH-14">SH-14</option>
+
+  <option value="SH-15">SH-15</option>
+
+  <option value="SH-16">SH-16</option>
+
+  <option value="TH-1">TH-1</option>
+
+  <option value="TH-2">TH-2</option>
+
+  <option value="TH-3">TH-3</option>
+
+  <option value="TH-4">TH-4</option>
+
+  <option value="TH-5">TH-5</option>
+
+  <option value="TH-6">TH-6</option>
+
+  <option value="TH-7">TH-7</option>
+
+  <option value="TH-8">TH-8</option>
+
+  <option value="TH-9">TH-9</option>
+
+  <option value="TH-10">TH-10</option>
+
+  <option value="TH-11">TH-11</option>
+
+  <option value="TH-12">TH-12</option>
+
+  <option value="TH-13">TH-13</option>
+
+  <option value="TH-14">TH-14</option>
+
+  <option value="TH-15">TH-15</option>
+
+  <option value="TH-16">TH-16</option>
+
+  <option value="C-1">C-1</option>
+
+  <option value="C-2">C-2</option>
+
+  <option value="C-3">C-3</option>
+
+  <option value="C-4">C-4</option>
+
+  <option value="C-5">C-5</option>
+
+  <option value="C-6">C-6</option>
+
+  <option value="C-7">C-7</option>
+
+  <option value="C-8">C-8</option>
+
+  <option value="C-9">C-9</option>
+
+  <option value="C-10">C-10</option>
+
+  <option value="C-11">C-11</option>
+
+  <option value="C-12">C-12</option>
+
+  <option value="C-13">C-13</option>
+
+  <option value="C-14">C-14</option>
+
+  <option value="C-15">C-15</option>
+
+  <option value="C-16">C-16</option>
+
+
+            <option value="None">None</option>
+
           
-            <option value="Alif-2">Alif-2</option>
-
-  <option value="Alif-3">Alif-3</option>
-
-  <option value="Alif-4">Alif-4</option>
-
-  <option value="Alif-5">Alif-5</option>
-
-  <option value="Alif-6">Alif-6</option>
-
-  <option value="Alif-7">Alif-7</option>
-
-  <option value="Alif-8">Alif-8</option>
-
-  <option value="Alif-9">Alif-9</option>
-
-  <option value="Alif-10">Alif-10</option>
-
-  <option value="Alif-11">Alif-11</option>
-
-  <option value="Alif-12">Alif-12</option>
-
-  <option value="Alif-13">Alif-13</option>
-
-  <option value="Alif-14">Alif-14</option>
-
-  <option value="Alif-15">Alif-15</option>
-
-  <option value="Alif-16">Alif-16</option>
-
-  <option value="Bay-1">Bay-1</option>
-
-  <option value="Bay-2">Bay-2</option>
-
-  <option value="Bay-3">Bay-3</option>
-
-  <option value="Bay-4">Bay-4</option>
-
-  <option value="Bay-5">Bay-5</option>
-
-  <option value="Bay-6">Bay-6</option>
-
-  <option value="Bay-7">Bay-7</option>
-
-  <option value="Bay-8">Bay-8</option>
-
-  <option value="Bay-9">Bay-9</option>
-
-  <option value="Bay-10">Bay-10</option>
-
-  <option value="Bay-11">Bay-11</option>
-
-  <option value="Bay-12">Bay-12</option>
-
-  <option value="Bay-13">Bay-13</option>
-
-  <option value="Bay-14">Bay-14</option>
-
-  <option value="Bay-15">Bay-15</option>
-
-  <option value="Bay-16">Bay-16</option>
-
-  <option value="Jeem-1">Jeem-1</option>
-
-  <option value="Jeem-2">Jeem-2</option>
-
-  <option value="Jeem-3">Jeem-3</option>
-
-  <option value="Jeem-4">Jeem-4</option>
-
-  <option value="Jeem-5">Jeem-5</option>
-
-  <option value="Jeem-6">Jeem-6</option>
-
-  <option value="Jeem-7">Jeem-7</option>
-
-  <option value="Jeem-8">Jeem-8</option>
-
-  <option value="Jeem-9">Jeem-9</option>
-
-  <option value="Jeem-10">Jeem-10</option>
-
-  <option value="Jeem-11">Jeem-11</option>
-
-  <option value="Jeem-12">Jeem-12</option>
-
-  <option value="Jeem-13">Jeem-13</option>
-
-  <option value="Jeem-14">Jeem-14</option>
-
-  <option value="Jeem-15">Jeem-15</option>
-
-  <option value="Jeem-16">Jeem-16</option>
-
-  <option value="Daal-1">Daal-1</option>
-
-  <option value="Daal-2">Daal-2</option>
-
-  <option value="Daal-3">Daal-3</option>
-
-  <option value="Daal-4">Daal-4</option>
-
-  <option value="Daal-5">Daal-5</option>
-
-  <option value="Daal-6">Daal-6</option>
-
-  <option value="Daal-7">Daal-7</option>
-
-  <option value="Daal-8">Daal-8</option>
-
-  <option value="Daal-9">Daal-9</option>
-
-  <option value="Daal-10">Daal-10</option>
-
-  <option value="Daal-11">Daal-11</option>
-
-  <option value="Daal-12">Daal-12</option>
-
-  <option value="Daal-13">Daal-13</option>
-
-  <option value="Daal-14">Daal-14</option>
-
-  <option value="Daal-15">Daal-15</option>
-
-  <option value="Daal-16">Daal-16</option>
-
-  <option value="Hay-1">Hay-1</option>
-
-  <option value="Hay-2">Hay-2</option>
-
-  <option value="Hay-3">Hay-3</option>
-
-  <option value="Hay-4">Hay-4</option>
-
-  <option value="Hay-5">Hay-5</option>
-
-  <option value="Hay-6">Hay-6</option>
-
-  <option value="Hay-7">Hay-7</option>
-
-  <option value="Hay-8">Hay-8</option>
-
-  <option value="Hay-9">Hay-9</option>
-
-  <option value="Hay-10">Hay-10</option>
-
-  <option value="Hay-11">Hay-11</option>
-
-  <option value="Hay-12">Hay-12</option>
-
-  <option value="Hay-13">Hay-13</option>
-
-  <option value="Hay-14">Hay-14</option>
-
-  <option value="Hay-15">Hay-15</option>
-
-  <option value="Hay-16">Hay-16</option>
-
-  <option value="Wao-1">Wao-1</option>
-
-  <option value="Wao-2">Wao-2</option>
-
-  <option value="Wao-3">Wao-3</option>
-
-  <option value="Wao-4">Wao-4</option>
-
-  <option value="Wao-5">Wao-5</option>
-
-  <option value="Wao-6">Wao-6</option>
-
-  <option value="Wao-7">Wao-7</option>
-
-  <option value="Wao-8">Wao-8</option>
-
-  <option value="Wao-9">Wao-9</option>
-
-  <option value="Wao-10">Wao-10</option>
-
-  <option value="Wao-11">Wao-11</option>
-
-  <option value="Wao-12">Wao-12</option>
-
-  <option value="Wao-13">Wao-13</option>
-
-  <option value="Wao-14">Wao-14</option>
-
-  <option value="Wao-15">Wao-15</option>
-
-  <option value="Wao-16">Wao-16</option>
-
-  <option value="Zay-1">Zay-1</option>
-
-  <option value="Zay-2">Zay-2</option>
-
-  <option value="Zay-3">Zay-3</option>
-
-  <option value="Zay-4">Zay-4</option>
-
-  <option value="Zay-5">Zay-5</option>
-
-  <option value="Zay-6">Zay-6</option>
-
-  <option value="Zay-7">Zay-7</option>
-
-  <option value="Zay-8">Zay-8</option>
-
-  <option value="Zay-9">Zay-9</option>
-
-  <option value="Zay-10">Zay-10</option>
-
-  <option value="Zay-11">Zay-11</option>
-
-  <option value="Zay-12">Zay-12</option>
-
-  <option value="Zay-13">Zay-13</option>
-
-  <option value="Zay-14">Zay-14</option>
-
-  <option value="Zay-15">Zay-15</option>
-
-  <option value="Zay-16">Zay-16</option>
-
-  <option value="Tuayn-1">Tuayn-1</option>
-
-  <option value="Tuayn-2">Tuayn-2</option>
-
-  <option value="Tuayn-3">Tuayn-3</option>
-
-  <option value="Tuayn-4">Tuayn-4</option>
-
-  <option value="Tuayn-5">Tuayn-5</option>
-
-  <option value="Tuayn-6">Tuayn-6</option>
-
-  <option value="Tuayn-7">Tuayn-7</option>
-
-  <option value="Tuayn-8">Tuayn-8</option>
-
-  <option value="Tuayn-9">Tuayn-9</option>
-
-  <option value="Tuayn-10">Tuayn-10</option>
-
-  <option value="Tuayn-11">Tuayn-11</option>
-
-  <option value="Tuayn-12">Tuayn-12</option>
-
-  <option value="Tuayn-13">Tuayn-13</option>
-
-  <option value="Tuayn-14">Tuayn-14</option>
-
-  <option value="Tuayn-15">Tuayn-15</option>
-
-  <option value="Tuayn-16">Tuayn-16</option>
-
-  <option value="Yay-1">Yay-1</option>
-
-  <option value="Yay-2">Yay-2</option>
-
-  <option value="Yay-3">Yay-3</option>
-
-  <option value="Yay-4">Yay-4</option>
-
-  <option value="Yay-5">Yay-5</option>
-
-  <option value="Yay-6">Yay-6</option>
-
-  <option value="Yay-7">Yay-7</option>
-
-  <option value="Yay-8">Yay-8</option>
-
-  <option value="Yay-9">Yay-9</option>
-
-  <option value="Yay-10">Yay-10</option>
-
-  <option value="Yay-11">Yay-11</option>
-
-  <option value="Yay-12">Yay-12</option>
-
-  <option value="Yay-13">Yay-13</option>
-
-  <option value="Yay-14">Yay-14</option>
-
-  <option value="Yay-15">Yay-15</option>
-
-  <option value="Yay-16">Yay-16</option>
-
-  <option value="Kaaf-1">Kaaf-1</option>
-
-  <option value="Kaaf-2">Kaaf-2</option>
-
-  <option value="Kaaf-3">Kaaf-3</option>
-
-  <option value="Kaaf-4">Kaaf-4</option>
-
-  <option value="Kaaf-5">Kaaf-5</option>
-
-  <option value="Kaaf-6">Kaaf-6</option>
-
-  <option value="Kaaf-7">Kaaf-7</option>
-
-  <option value="Kaaf-8">Kaaf-8</option>
-
-  <option value="Kaaf-9">Kaaf-9</option>
-
-  <option value="Kaaf-10">Kaaf-10</option>
-
-  <option value="Kaaf-11">Kaaf-11</option>
-
-  <option value="Kaaf-12">Kaaf-12</option>
-
-  <option value="Kaaf-13">Kaaf-13</option>
-
-  <option value="Kaaf-14">Kaaf-14</option>
-
-  <option value="Kaaf-15">Kaaf-15</option>
-
-  <option value="Kaaf-16">Kaaf-16</option>
-
-  <option value="Laam-1">Laam-1</option>
-
-  <option value="Laam-2">Laam-2</option>
-
-  <option value="Laam-3">Laam-3</option>
-
-  <option value="Laam-4">Laam-4</option>
-
-  <option value="Laam-5">Laam-5</option>
-
-  <option value="Laam-6">Laam-6</option>
-
-  <option value="Laam-7">Laam-7</option>
-
-  <option value="Laam-8">Laam-8</option>
-
-  <option value="Laam-9">Laam-9</option>
-
-  <option value="Laam-10">Laam-10</option>
-
-  <option value="Laam-11">Laam-11</option>
-
-  <option value="Laam-12">Laam-12</option>
-
-  <option value="Laam-13">Laam-13</option>
-
-  <option value="Laam-14">Laam-14</option>
-
-  <option value="Laam-15">Laam-15</option>
-
-  <option value="Laam-16">Laam-16</option>
-
-  <option value="Meem-1">Meem-1</option>
-
-  <option value="Meem-2">Meem-2</option>
-
-  <option value="Meem-3">Meem-3</option>
-
-  <option value="Meem-4">Meem-4</option>
-
-  <option value="Meem-5">Meem-5</option>
-
-  <option value="Meem-6">Meem-6</option>
-
-  <option value="Meem-7">Meem-7</option>
-
-  <option value="Meem-8">Meem-8</option>
-
-  <option value="Meem-9">Meem-9</option>
-
-  <option value="Meem-10">Meem-10</option>
-
-  <option value="Meem-11">Meem-11</option>
-
-  <option value="Meem-12">Meem-12</option>
-
-  <option value="Meem-13">Meem-13</option>
-
-  <option value="Meem-14">Meem-14</option>
-
-  <option value="Meem-15">Meem-15</option>
-
-  <option value="Meem-16">Meem-16</option>
-
-  <option value="Noon-1">Noon-1</option>
-
-  <option value="Noon-2">Noon-2</option>
-
-  <option value="Noon-3">Noon-3</option>
-
-  <option value="Noon-4">Noon-4</option>
-
-  <option value="Noon-5">Noon-5</option>
-
-  <option value="Noon-6">Noon-6</option>
-
-  <option value="Noon-7">Noon-7</option>
-
-  <option value="Noon-8">Noon-8</option>
-
-  <option value="Noon-9">Noon-9</option>
-
-  <option value="Noon-10">Noon-10</option>
-
-  <option value="Noon-11">Noon-11</option>
-
-  <option value="Noon-12">Noon-12</option>
-
-  <option value="Noon-13">Noon-13</option>
-
-  <option value="Noon-14">Noon-14</option>
-
-  <option value="Noon-15">Noon-15</option>
-
-  <option value="Noon-16">Noon-16</option>
-
-  <option value="Seen-1">Seen-1</option>
-
-  <option value="Seen-2">Seen-2</option>
-
-  <option value="Seen-3">Seen-3</option>
-
-  <option value="Seen-4">Seen-4</option>
-
-  <option value="Seen-5">Seen-5</option>
-
-  <option value="Seen-6">Seen-6</option>
-
-  <option value="Seen-7">Seen-7</option>
-
-  <option value="Seen-8">Seen-8</option>
-
-  <option value="Seen-9">Seen-9</option>
-
-  <option value="Seen-10">Seen-10</option>
-
-  <option value="Seen-11">Seen-11</option>
-
-  <option value="Seen-12">Seen-12</option>
-
-  <option value="Seen-13">Seen-13</option>
-
-  <option value="Seen-14">Seen-14</option>
-
-  <option value="Seen-15">Seen-15</option>
-
-  <option value="Seen-16">Seen-16</option>
-
-  <option value="Ayn-1">Ayn-1</option>
-
-  <option value="Ayn-2">Ayn-2</option>
-
-  <option value="Ayn-3">Ayn-3</option>
-
-  <option value="Ayn-4">Ayn-4</option>
-
-  <option value="Ayn-5">Ayn-5</option>
-
-  <option value="Ayn-6">Ayn-6</option>
-
-  <option value="Ayn-7">Ayn-7</option>
-
-  <option value="Ayn-8">Ayn-8</option>
-
-  <option value="Ayn-9">Ayn-9</option>
-
-  <option value="Ayn-10">Ayn-10</option>
-
-  <option value="Ayn-11">Ayn-11</option>
-
-  <option value="Ayn-12">Ayn-12</option>
-
-  <option value="Ayn-13">Ayn-13</option>
-
-  <option value="Ayn-14">Ayn-14</option>
-
-  <option value="Ayn-15">Ayn-15</option>
-
-  <option value="Ayn-16">Ayn-16</option>
-
-  <option value="Fay-1">Fay-1</option>
-
-  <option value="Fay-2">Fay-2</option>
-
-  <option value="Fay-3">Fay-3</option>
-
-  <option value="Fay-4">Fay-4</option>
-
-  <option value="Fay-5">Fay-5</option>
-
-  <option value="Fay-6">Fay-6</option>
-
-  <option value="Fay-7">Fay-7</option>
-
-  <option value="Fay-8">Fay-8</option>
-
-  <option value="Fay-9">Fay-9</option>
-
-  <option value="Fay-10">Fay-10</option>
-
-  <option value="Fay-11">Fay-11</option>
-
-  <option value="Fay-12">Fay-12</option>
-
-  <option value="Fay-13">Fay-13</option>
-
-  <option value="Fay-14">Fay-14</option>
-
-  <option value="Fay-15">Fay-15</option>
-
-  <option value="Fay-16">Fay-16</option>
-
-  <option value="Suaad-1">Suaad-1</option>
-
-  <option value="Suaad-2">Suaad-2</option>
-
-  <option value="Suaad-3">Suaad-3</option>
-
-  <option value="Suaad-4">Suaad-4</option>
-
-  <option value="Suaad-5">Suaad-5</option>
-
-  <option value="Suaad-6">Suaad-6</option>
-
-  <option value="Suaad-7">Suaad-7</option>
-
-  <option value="Suaad-8">Suaad-8</option>
-
-  <option value="Suaad-9">Suaad-9</option>
-
-  <option value="Suaad-10">Suaad-10</option>
-
-  <option value="Suaad-11">Suaad-11</option>
-
-  <option value="Suaad-12">Suaad-12</option>
-
-  <option value="Suaad-13">Suaad-13</option>
-
-  <option value="Suaad-14">Suaad-14</option>
-
-  <option value="Suaad-15">Suaad-15</option>
-
-  <option value="Suaad-16">Suaad-16</option>
-
-  <option value="Qaaf-1">Qaaf-1</option>
-
-  <option value="Qaaf-2">Qaaf-2</option>
-
-  <option value="Qaaf-3">Qaaf-3</option>
-
-  <option value="Qaaf-4">Qaaf-4</option>
-
-  <option value="Qaaf-5">Qaaf-5</option>
-
-  <option value="Qaaf-6">Qaaf-6</option>
-
-  <option value="Qaaf-7">Qaaf-7</option>
-
-  <option value="Qaaf-8">Qaaf-8</option>
-
-  <option value="Qaaf-9">Qaaf-9</option>
-
-  <option value="Qaaf-10">Qaaf-10</option>
-
-  <option value="Qaaf-11">Qaaf-11</option>
-
-  <option value="Qaaf-12">Qaaf-12</option>
-
-  <option value="Qaaf-13">Qaaf-13</option>
-
-  <option value="Qaaf-14">Qaaf-14</option>
-
-  <option value="Qaaf-15">Qaaf-15</option>
-
-  <option value="Qaaf-16">Qaaf-16</option>
-
-  <option value="Ray-1">Ray-1</option>
-
-  <option value="Ray-2">Ray-2</option>
-
-  <option value="Ray-3">Ray-3</option>
-
-  <option value="Ray-4">Ray-4</option>
-
-  <option value="Ray-5">Ray-5</option>
-
-  <option value="Ray-6">Ray-6</option>
-
-  <option value="Ray-7">Ray-7</option>
-
-  <option value="Ray-8">Ray-8</option>
-
-  <option value="Ray-9">Ray-9</option>
-
-  <option value="Ray-10">Ray-10</option>
-
-  <option value="Ray-11">Ray-11</option>
-
-  <option value="Ray-12">Ray-12</option>
-
-  <option value="Ray-13">Ray-13</option>
-
-  <option value="Ray-14">Ray-14</option>
-
-  <option value="Ray-15">Ray-15</option>
-
-  <option value="Ray-16">Ray-16</option>
-
-=======
-            </td>
-        </tr>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
->>>>>>> 1680ef2b2400d57621f915afb7cd8c03d49ab504
-
-
-        <tr>
-            <th><label for="id_massavi_no">Massavi no:</label></th>
-            <td>
-
-                <select name="massavi_no" id="id_massavi_no" style="width:13.3%;">
-
-                    <option value="Alif-1">Alif-1</option>
-
-                    <option value="Bay-1">Bay-1</option>
-
-                    <option value="Jeem-1">Jeem-1</option>
-
-                    <option value="Daal-1">Daal-1</option>
-
-                    <option value="Hay-1">Hay-1</option>
-
-                    <option value="Wao-1">Wao-1</option>
-
-                    <option value="None">None</option>
-
-
-                </select>
-
-
-            </td>
-        </tr>
-        <br>
-        <br>
-        <br>
-        <br>
-        <th><label style=" margin-left:4.37%;" for="id_image">Image:</label></th>
-        <tr>
-            <td>
-
+          </select>
+
+                
+                
+                  
+                
+              </td>
+            </tr>
+            <br>
+            <br>
+            <br>
+            <br>
+            <th><label style=" margin-left:4.37%;" for="id_image">Image:</label></th>
+            <tr>
+              <td>
+                
                 {% comment %} <input type="file" name="image" accept="image/*" id="id_image"  onchange="showPreview(event)"/> {% endcomment %}
                 <input type="file" name="image" name="image" accept="image/*" id="id_image" placeholder="entername"
-                       onchange="getImagePreview(event)"/>
+                  onchange="getImagePreview(event)" />
+                
+                  
+                    {% comment %} <img id="file-ip-1-preview" style="margin-left: 36.5%; height:400px; width:350px;background-color:white;">   {% endcomment %}
+                    
+                
+                
+              </td>
+            </tr>
 
 
-                {% comment %} <img id="file-ip-1-preview" style="margin-left: 36.5%; height:400px; width:350px;background-color:white;">   {% endcomment %}
+          <br>
+          
 
-
-            </td>
-        </tr>
-
-
-        <br>
-
-
-        {% comment %} Submit button {% endcomment %}
-        <div class="button_upload" style="margin-left: 330px">
-            <button style="margin-top:60px; background-color: #3cb371; color:white; font-size:17px; font-weight: bold; margin-left:2%; width: 10%;position: absolute; border-color:#3cb371;"
-                    class="btn btn-primary" type="submit" name="submit" id="submit"> Submit
-            </button>
+          {% comment %} Submit button {% endcomment %}
+          <div class="button_upload" style="margin-left: 330px" >
+            <button style="margin-top:60px; background-color: #3cb371; color:white; font-size:17px; font-weight: bold; margin-left:2%; width: 10%;position: absolute; border-color:#3cb371;" class = "btn btn-primary"  type="submit" name="submit" id="submit"> Submit </button>
             {% comment %} <input type="reset" value="Reset Form" style="margin-top:90px;"> {% endcomment %}
-        </div>
+          </div>
 
-        <br>
+          <br>
+
+{{ image }}
+
+        
+          
+          
+          
+
+          {% comment %} <img id="file-ip-1-preview" style="display: block;margin-left: 59%;position: absolute;height: 508px;width: 470px;top: 380px;background-color:white;">  {% endcomment %}
 
 
-        {% comment %} <img id="file-ip-1-preview" style="display: block;margin-left: 59%;position: absolute;height: 508px;width: 470px;top: 380px;background-color:white;">  {% endcomment %}
 
 
-        <br/>
-        <br/>
+            
+
+                 <br />
+                 <br /> 
+                 
+                 
 
 
-</form>
+    </form>
 
 </div>
+    <br>
+    <br>
+
+    {% if messages %}
+    {% for message in messages %}
+   <div class="alert alert-dismissible alert-success">
+     <h5 align= center>{{message}}</h5>
+   </div>
+    {% endfor %}
+    {% endif %}
+
+    
 
 
 <br>
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 1680ef2b2400d57621f915afb7cd8c03d49ab504
+{#{{ form.as_p }}#}
 <!-- Error messaging -->
 {% comment %} {% if not img_obj %}
             
@@ -1189,6 +1576,10 @@
   
 {% endif %} {% endcomment %}
 
+
+
+
+    
 
 {% comment %} <h3 align="center" style="margin-top:60px; display: inline; color:green; margin-left: 128px;"></h3>
 
@@ -1230,6 +1621,8 @@
           });
 
 </script> {% endcomment %}
+
+
 
 
 </html>

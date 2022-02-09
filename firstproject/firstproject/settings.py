@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-from osgeo import gdal
+# from osgeo import gdal
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,7 +77,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'firstproject.wsgi.application'
 
 # GDL_path
-GDAL_LIBRARY_PATH = r'C:\Users\dell\AppData\Local\Programs\Python\Python38\Lib\site-packages\django\contrib\gis\gdal\libgdal.py'
+# GDAL_LIBRARY_PATH = r'C:\Users\dell\AppData\Local\Programs\Python\Python38\Lib\site-packages\django\contrib\gis\gdal\libgdal.py'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -93,26 +93,26 @@ GDAL_LIBRARY_PATH = r'C:\Users\dell\AppData\Local\Programs\Python\Python38\Lib\s
 #
 #    }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-DATABASES={
+DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'horizon9919',
-        'HOST': 'localhost',
-        'PORT': '5432',
-        'OPTIONS': {
-            'options': '-c search_path=image_util'
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES={
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'horizon9919',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#         'OPTIONS': {
+#             'options': '-c search_path=image_util'
+#         }
+#     }
+# }
 
 
 # Password validation

@@ -20,12 +20,7 @@ from django.contrib import messages
 
 import json
 
-
-from PIL import  Image,ImageFont, ImageDraw
-
-
-
-
+from PIL import Image, ImageFont, ImageDraw
 
 
 def index(request):
@@ -62,27 +57,28 @@ def image_request(request):
             # submitbutton= request.POST.get("submit")
             form = UserImageForm(request.POST, request.FILES)
             if form.is_valid():
-
+                stamp_image(request)
                 # form.instance.district = request.user
                 form.save()
-                district =  request.POST.get("district")
+                district = request.POST.get("district")
                 tehsil = request.POST.get("tehsil")
                 patwar_circle = request.POST.get("patwar_circle")
                 mauza = request.POST.get("mauza")
                 massavi_no = request.POST.get("massavi_no")
-                image = request.POST.get("image")
+                image = Image.open(request.POST.get("image"))
 
-                image1 = Image.open(image)
-                draw = ImageDraw.Draw(image1)
+                # image1 = Image.open(image)
+                draw = ImageDraw.Draw(image)
 
                 # specified font size
-                font = ImageFont.truetype(r'C:\Users\dell\Downloads\Sometime.ttf', 40)
+                # font = ImageFont.truetype(r'C:\Users\dell\Downloads\Sometime.ttf', 40)
 
                 text = 'LAUGHING IS THE \n BEST MEDICINE'
 
                 # drawing text size
-                draw.text((10, 10), text, fill="red", font=font, align="right")
-
+                draw.text((10, 10), text, fill="red", align="right")
+                image_path = '/var/www/html/img.jpg'
+                image.save(image_path)
                 # image.show()
                 # context = {'form': form, 'submitbutton': submitbutton, 'district':district, 'tehsil':tehsil, 'patwar_circle':patwar_circle, 'mauza':mauza, 'massavi_no':massavi_no}
 
@@ -93,9 +89,9 @@ def image_request(request):
 
                 all_in = district + '_' + tehsil + '_' + patwar_circle + '_' + mauza + '_' + massavi_no
 
-                mesage = ' Form submitted succesfully '+': '+district+'_'+tehsil+'_'+patwar_circle+'_'+mauza+'_'+massavi_no
+                mesage = ' Form submitted succesfully ' + ': ' + district + '_' + tehsil + '_' + patwar_circle + '_' + mauza + '_' + massavi_no
 
-                messages.success(request, mesage )
+                messages.success(request, mesage)
 
                 return render(request, 'image_form.html', {'form': form, "form_data": json.dumps(context)})
 
@@ -115,11 +111,9 @@ def image_request(request):
             mauza = request.POST.get("mauza")
             massavi_no = request.POST.get("massavi_no")
 
+            message_error = ' Form already exists ' + ': ' + district + '_' + tehsil + '_' + patwar_circle + '_' + mauza + '_' + massavi_no
 
-
-            message_error = ' Form already exists '+': '+ district+'_'+tehsil+'_'+patwar_circle+'_'+mauza+'_'+massavi_no
-
-            messages.error(request,message_error )
+            messages.error(request, message_error)
             # return HttpResponse('<h1 style="color: red;">Form already exists</h1>')
 
 
@@ -127,6 +121,33 @@ def image_request(request):
         form = UserImageForm()
 
     return render(request, 'image_form.html', {'form': form})
+
+
+def stamp_image(request):
+    district = request.POST.get("district")
+    tehsil = request.POST.get("tehsil")
+    patwar_circle = request.POST.get("patwar_circle")
+    mauza = request.POST.get("mauza")
+    massavi_no = request.POST.get("massavi_no")
+    image = Image.open(request.FILES["image"])
+
+    # image1 = Image.open(image)
+    draw = ImageDraw.Draw(image)
+
+    # specified font size
+    # font = ImageFont.truetype(r'C:\Users\dell\Downloads\Sometime.ttf', 40)
+
+    text = district + '_' + tehsil + '_' + patwar_circle + '_' + mauza + '_' + massavi_no
+
+    # drawing text size
+    draw.text((10, 10), text, fill="red", align="right")
+    image_name = (request.FILES["image"].name)
+    # image_extension = (request.FILES["image"].name).split('.')[1]
+    # image_path = 'C:\Users\dell\Downloads\img.png'
+
+    image_path = '/var/www/html/' + image_name
+    image.save(image_path)
+    return None
 
 
 def search(request):

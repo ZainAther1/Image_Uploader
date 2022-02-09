@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-from osgeo import gdal
+# from osgeo import gdal
 
 
 # lists of options
